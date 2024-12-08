@@ -1,0 +1,384 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EB10B2BA2CE3C3FD005AA66F /* CableCrossSectionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB10B2B92CE3C3FD005AA66F /* CableCrossSectionApp.swift */; };
+		EB10B2BC2CE3C3FD005AA66F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB10B2BB2CE3C3FD005AA66F /* ContentView.swift */; };
+		EB10B2BE2CE3C401005AA66F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB10B2BD2CE3C401005AA66F /* Assets.xcassets */; };
+		EB10B2C12CE3C401005AA66F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB10B2C02CE3C401005AA66F /* Preview Assets.xcassets */; };
+		EB10B2C82CE3C4EE005AA66F /* CrossSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB10B2C72CE3C4EE005AA66F /* CrossSectionView.swift */; };
+		EB10B2CC2CE3C6C0005AA66F /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB10B2CB2CE3C6C0005AA66F /* TableView.swift */; };
+		EB7B45E02D0367ED003AB588 /* VoltageDropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7B45DF2D0367ED003AB588 /* VoltageDropView.swift */; };
+		EB7B45E32D04C555003AB588 /* SharedInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7B45E22D04C555003AB588 /* SharedInputs.swift */; };
+		EBE3CE0E2CEA7F760090C639 /* KeyboardToolbarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE3CE0D2CEA7F760090C639 /* KeyboardToolbarModifier.swift */; };
+		EBE3CE102CF0FEBB0090C639 /* TableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE3CE0F2CF0FEBB0090C639 /* TableData.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		EB10B2B62CE3C3FD005AA66F /* CableCrossSection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CableCrossSection.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB10B2B92CE3C3FD005AA66F /* CableCrossSectionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CableCrossSectionApp.swift; sourceTree = "<group>"; };
+		EB10B2BB2CE3C3FD005AA66F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EB10B2BD2CE3C401005AA66F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EB10B2C02CE3C401005AA66F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EB10B2C72CE3C4EE005AA66F /* CrossSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossSectionView.swift; sourceTree = "<group>"; };
+		EB10B2CB2CE3C6C0005AA66F /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
+		EB7B45DF2D0367ED003AB588 /* VoltageDropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoltageDropView.swift; sourceTree = "<group>"; };
+		EB7B45E22D04C555003AB588 /* SharedInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedInputs.swift; sourceTree = "<group>"; };
+		EBE3CE0D2CEA7F760090C639 /* KeyboardToolbarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbarModifier.swift; sourceTree = "<group>"; };
+		EBE3CE0F2CF0FEBB0090C639 /* TableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableData.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EB10B2B32CE3C3FD005AA66F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EB10B2AD2CE3C3FD005AA66F = {
+			isa = PBXGroup;
+			children = (
+				EB10B2B82CE3C3FD005AA66F /* CableCrossSection */,
+				EB10B2B72CE3C3FD005AA66F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EB10B2B72CE3C3FD005AA66F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EB10B2B62CE3C3FD005AA66F /* CableCrossSection.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EB10B2B82CE3C3FD005AA66F /* CableCrossSection */ = {
+			isa = PBXGroup;
+			children = (
+				EBE3CE0D2CEA7F760090C639 /* KeyboardToolbarModifier.swift */,
+				EB10B2B92CE3C3FD005AA66F /* CableCrossSectionApp.swift */,
+				EB7B45DC2D0365AD003AB588 /* Views */,
+				EB7B45E12D04C155003AB588 /* Models */,
+				EBE3CE0F2CF0FEBB0090C639 /* TableData.swift */,
+				EB10B2BB2CE3C3FD005AA66F /* ContentView.swift */,
+				EB10B2BD2CE3C401005AA66F /* Assets.xcassets */,
+				EB10B2BF2CE3C401005AA66F /* Preview Content */,
+			);
+			path = CableCrossSection;
+			sourceTree = "<group>";
+		};
+		EB10B2BF2CE3C401005AA66F /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				EB10B2C02CE3C401005AA66F /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		EB7B45DC2D0365AD003AB588 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EB10B2C72CE3C4EE005AA66F /* CrossSectionView.swift */,
+				EB10B2CB2CE3C6C0005AA66F /* TableView.swift */,
+				EB7B45DF2D0367ED003AB588 /* VoltageDropView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EB7B45E12D04C155003AB588 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EB7B45E22D04C555003AB588 /* SharedInputs.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EB10B2B52CE3C3FD005AA66F /* CableCrossSection */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB10B2C42CE3C401005AA66F /* Build configuration list for PBXNativeTarget "CableCrossSection" */;
+			buildPhases = (
+				EB10B2B22CE3C3FD005AA66F /* Sources */,
+				EB10B2B32CE3C3FD005AA66F /* Frameworks */,
+				EB10B2B42CE3C3FD005AA66F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CableCrossSection;
+			productName = CableCrossSection;
+			productReference = EB10B2B62CE3C3FD005AA66F /* CableCrossSection.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EB10B2AE2CE3C3FD005AA66F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					EB10B2B52CE3C3FD005AA66F = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = EB10B2B12CE3C3FD005AA66F /* Build configuration list for PBXProject "CableCrossSection" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EB10B2AD2CE3C3FD005AA66F;
+			productRefGroup = EB10B2B72CE3C3FD005AA66F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EB10B2B52CE3C3FD005AA66F /* CableCrossSection */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EB10B2B42CE3C3FD005AA66F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB10B2C12CE3C401005AA66F /* Preview Assets.xcassets in Resources */,
+				EB10B2BE2CE3C401005AA66F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EB10B2B22CE3C3FD005AA66F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB10B2BC2CE3C3FD005AA66F /* ContentView.swift in Sources */,
+				EBE3CE0E2CEA7F760090C639 /* KeyboardToolbarModifier.swift in Sources */,
+				EB7B45E02D0367ED003AB588 /* VoltageDropView.swift in Sources */,
+				EB10B2BA2CE3C3FD005AA66F /* CableCrossSectionApp.swift in Sources */,
+				EB10B2C82CE3C4EE005AA66F /* CrossSectionView.swift in Sources */,
+				EBE3CE102CF0FEBB0090C639 /* TableData.swift in Sources */,
+				EB10B2CC2CE3C6C0005AA66F /* TableView.swift in Sources */,
+				EB7B45E32D04C555003AB588 /* SharedInputs.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		EB10B2C22CE3C401005AA66F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EB10B2C32CE3C401005AA66F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EB10B2C52CE3C401005AA66F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"CableCrossSection/Preview Content\"";
+				DEVELOPMENT_TEAM = CXTXJQMUG9;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ahmeddh.CableCrossSection;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EB10B2C62CE3C401005AA66F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"CableCrossSection/Preview Content\"";
+				DEVELOPMENT_TEAM = CXTXJQMUG9;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ahmeddh.CableCrossSection;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EB10B2B12CE3C3FD005AA66F /* Build configuration list for PBXProject "CableCrossSection" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB10B2C22CE3C401005AA66F /* Debug */,
+				EB10B2C32CE3C401005AA66F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EB10B2C42CE3C401005AA66F /* Build configuration list for PBXNativeTarget "CableCrossSection" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB10B2C52CE3C401005AA66F /* Debug */,
+				EB10B2C62CE3C401005AA66F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EB10B2AE2CE3C3FD005AA66F /* Project object */;
+}
