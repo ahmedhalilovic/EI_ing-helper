@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB086F6F2D0E565D00D2F218 /* BusbarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB086F6E2D0E565D00D2F218 /* BusbarTableView.swift */; };
 		EB10B2BA2CE3C3FD005AA66F /* CableCrossSectionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB10B2B92CE3C3FD005AA66F /* CableCrossSectionApp.swift */; };
 		EB10B2BC2CE3C3FD005AA66F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB10B2BB2CE3C3FD005AA66F /* ContentView.swift */; };
 		EB10B2BE2CE3C401005AA66F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB10B2BD2CE3C401005AA66F /* Assets.xcassets */; };
 		EB10B2C12CE3C401005AA66F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB10B2C02CE3C401005AA66F /* Preview Assets.xcassets */; };
 		EB10B2C82CE3C4EE005AA66F /* CrossSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB10B2C72CE3C4EE005AA66F /* CrossSectionView.swift */; };
 		EB10B2CC2CE3C6C0005AA66F /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB10B2CB2CE3C6C0005AA66F /* TableView.swift */; };
+		EB4F5E4E2D08D7D60004A6C5 /* CompensationCalcuatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB4F5E4D2D08D7D60004A6C5 /* CompensationCalcuatorView.swift */; };
 		EB7B45E02D0367ED003AB588 /* VoltageDropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7B45DF2D0367ED003AB588 /* VoltageDropView.swift */; };
 		EB7B45E32D04C555003AB588 /* SharedInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7B45E22D04C555003AB588 /* SharedInputs.swift */; };
 		EBE3CE0E2CEA7F760090C639 /* KeyboardToolbarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE3CE0D2CEA7F760090C639 /* KeyboardToolbarModifier.swift */; };
@@ -20,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EB086F6E2D0E565D00D2F218 /* BusbarTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusbarTableView.swift; sourceTree = "<group>"; };
 		EB10B2B62CE3C3FD005AA66F /* CableCrossSection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CableCrossSection.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB10B2B92CE3C3FD005AA66F /* CableCrossSectionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CableCrossSectionApp.swift; sourceTree = "<group>"; };
 		EB10B2BB2CE3C3FD005AA66F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -27,6 +30,7 @@
 		EB10B2C02CE3C401005AA66F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EB10B2C72CE3C4EE005AA66F /* CrossSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrossSectionView.swift; sourceTree = "<group>"; };
 		EB10B2CB2CE3C6C0005AA66F /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
+		EB4F5E4D2D08D7D60004A6C5 /* CompensationCalcuatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompensationCalcuatorView.swift; sourceTree = "<group>"; };
 		EB7B45DF2D0367ED003AB588 /* VoltageDropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoltageDropView.swift; sourceTree = "<group>"; };
 		EB7B45E22D04C555003AB588 /* SharedInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedInputs.swift; sourceTree = "<group>"; };
 		EBE3CE0D2CEA7F760090C639 /* KeyboardToolbarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbarModifier.swift; sourceTree = "<group>"; };
@@ -89,6 +93,8 @@
 				EB10B2C72CE3C4EE005AA66F /* CrossSectionView.swift */,
 				EB10B2CB2CE3C6C0005AA66F /* TableView.swift */,
 				EB7B45DF2D0367ED003AB588 /* VoltageDropView.swift */,
+				EB4F5E4D2D08D7D60004A6C5 /* CompensationCalcuatorView.swift */,
+				EB086F6E2D0E565D00D2F218 /* BusbarTableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -172,6 +178,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB10B2BC2CE3C3FD005AA66F /* ContentView.swift in Sources */,
+				EB4F5E4E2D08D7D60004A6C5 /* CompensationCalcuatorView.swift in Sources */,
+				EB086F6F2D0E565D00D2F218 /* BusbarTableView.swift in Sources */,
 				EBE3CE0E2CEA7F760090C639 /* KeyboardToolbarModifier.swift in Sources */,
 				EB7B45E02D0367ED003AB588 /* VoltageDropView.swift in Sources */,
 				EB10B2BA2CE3C3FD005AA66F /* CableCrossSectionApp.swift in Sources */,

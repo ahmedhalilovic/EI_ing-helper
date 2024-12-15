@@ -22,6 +22,23 @@ struct VoltageDropView: View {
             Form {
                 Section {
                     VStack {
+                        // Title and the Clear button
+//                        HStack {
+//                            Spacer() // Pushes the button to the right
+//                            Button(action: {
+//                                // Action to clear the input fields
+//                                clearInputs()
+//                            }) {
+//                                Image(systemName: "trash.fill") // Trash icon
+//                                    .resizable()
+//                                    .scaledToFit()
+//                                    .frame(width: 20, height: 20)
+//                                    .padding()
+//                            }
+//                            .frame(maxWidth: .infinity, alignment: .trailing)
+//                        }
+//                        .padding(.horizontal)
+                        
                         HStack {
                             Text("Power (kW)")
                                 .font(.subheadline)
@@ -106,7 +123,6 @@ struct VoltageDropView: View {
                                 .onAppear {
                                     if !sharedData.isManualEntryCrossSection {
                                         updateCrossSectionBasedOnMaterial() // Automatically set the cross-section based on material and conductivity
-                                        print("appeeared")
                                     }
                                 }
                         }
@@ -152,9 +168,11 @@ struct VoltageDropView: View {
                         }
 
                         //Equation display
-                        Text("Voltage Drop (ΔV) = (√3 × I × R × L) / 1000")
-                            .font(.subheadline)
-                            .padding(.vertical)
+                        Text("ΔV = (√3 × I × R × L) / 1000")
+                            .font(.system(size: 16, weight: .medium, design: .monospaced))
+                            .foregroundColor(.gray)
+                            .multilineTextAlignment(.center)
+                            .padding(.bottom, 10)
 
                         //Resul display
                         if !resultVoltageDrop.isEmpty {
@@ -234,6 +252,16 @@ struct VoltageDropView: View {
 
         // Calculate max cable length
         return numerator / denumerator
+    }
+    
+    // Clear Function
+    private func clearInputs() {
+        sharedData.powerKW = ""
+        sharedData.voltage = "400"
+        sharedData.cableLength = ""
+        sharedData.cableCrossSection = ""
+        sharedData.selectedMaterial = "Cu"
+        sharedData.isManualEntryCrossSection = false
     }
 }
 

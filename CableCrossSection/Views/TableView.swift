@@ -22,15 +22,31 @@ struct TableView: View {
                 Text("Max Current (Cu)")
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(5) // Optional: Add padding to make it visually better
+                    .background(Color(red: 0.72, green: 0.45, blue: 0.20, opacity: 0.5))
+                    .cornerRadius(8) // Optional: Add rounded corners
+                    .foregroundColor(.black) // Set text color for contrast
                 Text("Fuse (Cu)")
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(5) // Optional: Add padding to make it visually better
+                    .background(Color(red: 0.72, green: 0.45, blue: 0.20, opacity: 0.5))
+                    .cornerRadius(4) // Optional: Add rounded corners
+                    .foregroundColor(.black) // Set text color for contrast
                 Text("Max Current (Al)")
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .center)
+                    .padding(5) // Optional: Add padding to make it visually better
+                    .background(Color(red: 0.75, green: 0.75, blue: 0.75, opacity: 0.5))
+                    .cornerRadius(8) // Optional: Add rounded corners
+                    .foregroundColor(.black) // Set text color for contrast
                 Text("Fuse (Al)")
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .trailing)
+                    .padding(5) // Optional: Add padding to make it visually better
+                    .background(Color(red: 0.75, green: 0.75, blue: 0.75, opacity: 0.5))
+                    .cornerRadius(4) // Optional: Add rounded corners
+                    .foregroundColor(.black) // Set text color for contrast
             }
             .padding()
             .background(Color.gray.opacity(0.2))
@@ -51,9 +67,6 @@ struct TableView: View {
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
                 .padding(.vertical, 0.5)
-                //.background(Color.white)
-                //                .background(sharedData.selectedCopperRow == row ? Color.yellow.opacity(0.3) : Color.clear)
-                //                .background(sharedData.selectedAlluminumRow == row ? Color.green.opacity(0.3) : Color.clear)
                 .background(
                     sharedData.selectedCopperRow == row ? Color(red: 0.72, green: 0.45, blue: 0.20, opacity: 0.5) : // Copper-like color
                     sharedData.selectedAluminumRow == row ? Color(red: 0.75, green: 0.75, blue: 0.75, opacity: 0.5) : // Aluminum-like color
@@ -64,51 +77,32 @@ struct TableView: View {
         .padding()
         .border(Color.gray, width: 1) // Add border around the table
         
-        
-        
-//        VStack {
-//                HStack {
-//                    Text("Cross-Section (mm2)")
-//                        .bold()
-//                        .background(Color.gray.opacity(0.2))
-//                        .font(.subheadline)
-//                        .frame(maxWidth: .infinity, alignment: .leading)
-//                    Text("Max Current (Cu)")
-//                        .bold()
-//                        .font(.subheadline)
-//                        .frame(maxWidth: .infinity, alignment: .center)
-//                    Text("Fuse (Cu)").bold()
-//                        .bold()
-//                        .font(.subheadline)
-//                        .frame(maxWidth: .infinity, alignment: .center)
-//                    Text("Max Current (Al)")
-//                        .bold()
-//                        .font(.subheadline)
-//                        .frame(maxWidth: .infinity, alignment: .trailing)
-//                    Text("Fuse (Al)")
-//                        .bold()
-//                        .font(.subheadline)
-//                        .frame(maxWidth: .infinity, alignment: .trailing)
-//                }
-//                .padding()
-//
-//                Divider() // Optional separator line
-//
-//                List(cableData) { cable in
-//                    HStack {
-//                        Text(cable.crossSection)
-//                            .bold()
-//                            .frame(maxWidth: .infinity, alignment: .leading)
-//                            .padding(5)
-//                        Divider().frame(width: 1, height: 20).background(Color.gray)
-//                        Text(cable.maxCurrentCu).frame(maxWidth: .infinity, alignment: .leading)
-//                        Text(cable.fuseForCu).frame(maxWidth: .infinity, alignment: .center)
-//                        Text(cable.maxCurrentAl).frame(maxWidth: .infinity, alignment: .trailing)
-//                        Text(cable.fuseForAl).frame(maxWidth: .infinity, alignment: .trailing)
-//                    }
-//                }
-//        }
-//        .padding()
+        // Legend
+        VStack {
+            // Copper Legend
+            HStack(spacing: 5) {
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(Color(red: 0.72, green: 0.45, blue: 0.20, opacity: 0.5)) // Copper color
+                    .frame(width: 20, height: 20)
+                Text("Copper")
+                    .font(.caption)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            
+            // Aluminum Legend
+            HStack(spacing: 5) {
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(Color(red: 0.75, green: 0.75, blue: 0.75, opacity: 0.5)) // Aluminum color
+                    .frame(width: 20, height: 20)
+                Text("Aluminum")
+                    .font(.caption)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .padding(.horizontal)
+        .padding(.top, 8)
+        .frame(maxWidth: .infinity, alignment: .leading)
+    
     }
 }
 

@@ -20,6 +20,13 @@ struct DataVariables: Identifiable, Equatable {
     let fuseForAl: String
 }
 
+struct BusbarDataVariables: Identifiable, Equatable {
+    let id = UUID()
+    let size: String
+    let stacked: String
+    let maxCurrentForBusbar: String
+}
+
 struct CableLoadData {
     
     static let crossSection: [CableSize] = [
@@ -65,7 +72,16 @@ struct CableLoadData {
     ]
 }
 
-
+struct BusbarLoadData {
+    static let busbarData: [BusbarDataVariables] = [
+    BusbarDataVariables(size: "10x3 mm", stacked: "1", maxCurrentForBusbar: "146 A"),
+    BusbarDataVariables(size: "20x3 mm", stacked: "1", maxCurrentForBusbar: "204 A"),
+    BusbarDataVariables(size: "20x5 mm", stacked: "1", maxCurrentForBusbar: "274 A"),
+    BusbarDataVariables(size: "30x5 mm", stacked: "1", maxCurrentForBusbar: "379 A"),
+    BusbarDataVariables(size: "30x10 mm", stacked: "1", maxCurrentForBusbar: "573 A"),
+    BusbarDataVariables(size: "40x10 mm", stacked: "1", maxCurrentForBusbar: "715 A"),
+    ]
+}
 
 /*
  

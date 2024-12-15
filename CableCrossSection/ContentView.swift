@@ -15,7 +15,7 @@ struct ContentView: View {
             NavigationStack {
                     CrossSectionView()
                     .environmentObject(sharedData)
-                        .navigationTitle("Cross Section")
+                        .navigationTitle("Cross-section")
                 }
                 .tabItem {
                     Label("Cross Section", systemImage: "circle.grid.cross.up.filled")
