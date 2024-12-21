@@ -77,32 +77,52 @@ struct TableView: View {
         .padding()
         .border(Color.gray, width: 1) // Add border around the table
         
-        // Legend
-        VStack {
-            // Copper Legend
-            HStack(spacing: 5) {
-                RoundedRectangle(cornerRadius: 4)
-                    .fill(Color(red: 0.72, green: 0.45, blue: 0.20, opacity: 0.5)) // Copper color
-                    .frame(width: 20, height: 20)
-                Text("Copper")
-                    .font(.caption)
+        HStack {
+            
+            // Legend
+            VStack {
+                // Copper Legend
+                HStack(spacing: 5) {
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(Color(red: 0.72, green: 0.45, blue: 0.20, opacity: 0.5)) // Copper color
+                        .frame(width: 20, height: 20)
+                    Text("Copper")
+                        .font(.caption)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
+                // Aluminum Legend
+                HStack(spacing: 5) {
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(Color(red: 0.75, green: 0.75, blue: 0.75, opacity: 0.5)) // Aluminum color
+                        .frame(width: 20, height: 20)
+                    Text("Aluminum")
+                        .font(.caption)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
+            .padding(.horizontal)
+            .padding(.top, 8)
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            // Aluminum Legend
-            HStack(spacing: 5) {
-                RoundedRectangle(cornerRadius: 4)
-                    .fill(Color(red: 0.75, green: 0.75, blue: 0.75, opacity: 0.5)) // Aluminum color
-                    .frame(width: 20, height: 20)
-                Text("Aluminum")
-                    .font(.caption)
+            Spacer()
+            
+            Button(action: {
+                sharedData.showBusbarSheet = true // Show the sheet when the button is pressed
+            }) {
+                Text("SHOW BUSBAR\nCURRENTS")
+                    .font(.subheadline) // Smaller font size
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .padding(.vertical, 10) // Reduced vertical padding
+                    .padding(.horizontal, 20) // Reduced horizontal padding
+                    .cornerRadius(10) // Smaller corner radius
+                    .shadow(radius: 5) // Reduced shadow radius
+                    .padding(.horizontal, 15)
+                    .background(Color(red: 0.72, green: 0.45, blue: 0.20, opacity: 0.5))
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .padding(.horizontal)
-        .padding(.top, 8)
-        .frame(maxWidth: .infinity, alignment: .leading)
-    
+        
     }
 }
 

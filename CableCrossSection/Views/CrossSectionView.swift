@@ -19,59 +19,150 @@ struct CrossSectionView: View {
     @State private var resultRecomendedCableAl: String? = nil
     
     var body: some View {
-            Form {
-                Section {
-                    HStack {
-                        Group {
-                            InputField(title: "Power (kW)", text: $sharedData.powerKW)
-                            //.keyboardToolbar()
-                            Picker("Power factor (cos φ)",
-                                   selection: $sharedData.powerFactor) {
-                                ForEach(0...100, id: \.self) { index in
-                                    let value = Double(index) / 100.0
-                                    Text(String(format: "%.2f", value))
-                                        .tag(value)
-                                }
+        Form {
+            Section {
+                HStack {
+                    Group {
+                        InputField(title: "Power (kW)", text: $sharedData.powerKW)
+                        //.keyboardToolbar()
+                        Picker("Power factor (cos φ)",
+                               selection: $sharedData.powerFactor) {
+                            ForEach(0...100, id: \.self) { index in
+                                let value = Double(index) / 100.0
+                                Text(String(format: "%.2f", value))
+                                    .tag(value)
                             }
-                                   .pickerStyle(WheelPickerStyle())
-                                   .frame(height: 120)
-                                   .background(Color.white)
-                                   .frame(maxWidth: .infinity)
-                                   .onAppear {
-                                       if sharedData.powerFactor == 0 {
-                                           sharedData.powerFactor = 0.95
-                                       }
+                        }
+                               .pickerStyle(WheelPickerStyle())
+                               .frame(height: 120)
+                               .background(Color.white)
+                               .frame(maxWidth: .infinity)
+                               .onAppear {
+                                   if sharedData.powerFactor == 0 {
+                                       sharedData.powerFactor = 0.95
                                    }
-                        }
+                               }
                     }
-                    //VStack {
-                        HStack {
-                            // Calculate button
-                            Button(action: {
-                                calculateCurrent()
-                                sharedData.showBusbarButton = true // Show the busbar button after calculation
-                                print(sharedData.showBusbarSheet)
-                            }) {
-                                Text("Calculate")
-                                    .font(.headline)
-                                    .padding()
-                                    .background(Color.blue)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(8)
-                            }
-                            
-                            
-                            
+                }
+                
+                HStack {
+                    Spacer()
+                    HStack(spacing: 20) {
+                        // Calculate button
+                        Button(action: {
+                            calculateCurrent()
+                            sharedData.showBusbarButton = true // Show the busbar button after calculation
+                        }) {
+                            Text("Calculate")
+                                .font(.headline)
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                                .shadow(radius: 2)
                         }
-                    // The busbar button will appear after calculation button
+                        .buttonStyle(PlainButtonStyle())
+                    }
+                    Spacer()
+                }
+                
+            } header: {
+                Text("Input parameters")
+                
+            }
+            
+            // Result display (currents, recomended cross-secton and fuses)
+            Section {
+                
+                VStack(spacing: 20) {
+                    // Current Results
+                    VStack(alignment: .leading, spacing: 10) {
+                        HStack {
+                            Image(systemName: "bolt.fill")
+                                .foregroundColor(.yellow)
+                            Text("1-Phase Current:")
+                                .bold()
+                            Spacer()
+                            Text(resultCurrent1Phase ?? "- A")
+                                .foregroundColor(.blue)
+                        }
+                        .padding()
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(8)
+                        
+                        HStack {
+                            Image(systemName: "bolt.circle.fill")
+                                .foregroundColor(.orange)
+                            Text("3-Phase Current:")
+                                .bold()
+                            Spacer()
+                            Text(resultCurrent3Phase ?? "- A")
+                                .foregroundColor(.blue)
+                        }
+                        .padding()
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(8)
+                    }
+                    
+                    // Copper Results
+                    VStack(alignment: .leading, spacing: 10) {
+                        HStack {
+                            Image(systemName: "c.square.fill")
+                                .foregroundColor(.brown)
+                            Text("Copper:")
+                                .bold()
+                            Spacer()
+                            Text(resultRecomendedCableCu ?? "⌀: -, Fuse: -")
+                                .foregroundColor(.green)
+                        }
+                        .padding()
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(8)
+                    }
+                    
+                    // Aluminum Results
+                    VStack(alignment: .leading, spacing: 10) {
+                        HStack {
+                            Image(systemName: "a.square.fill")
+                                .foregroundColor(.gray)
+                            Text("Aluminum:")
+                                .bold()
+                            Spacer()
+                            Text(resultRecomendedCableAl ?? "⌀: -, Fuse: -")
+                                .foregroundColor(.green)
+                        }
+                        .padding()
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(8)
+                    }
+                }
+                
+                Spacer()
+                
+            } header: {
+                HStack {
+                    Text("Results")
+                    
+                    Spacer()
+                    
                     Button(action: {
                         sharedData.showBusbarSheet = true // Show the sheet when the button is pressed
                     }) {
-                        Image(systemName: "table")
-                            .foregroundColor(.blue)
-                            .padding()
-                            .background(Color.gray.opacity(0.2))
-                            .cornerRadius(8)
+                        HStack {
+                            VStack {
+                                Text("BUSBAR")
+                                    .font(.system(size: 12, weight: .semibold))
+                                Text("SIZE")
+                                    .font(.system(size: 12, weight: .semibold))
+                                
+                            }
+                            HStack {
+                                Image(systemName: "pause.fill")
+                                    .foregroundColor(Color(red: 0.72, green: 0.45, blue: 0.20, opacity: 0.5))
+                                    .font(.system(size: 30))
+                                    .background(Color.gray.opacity(0.2))
+                            }
+                        }
                     }
                     .opacity(sharedData.showBusbarButton ? 1 : 0)
                     .animation(.easeInOut, value: sharedData.showBusbarButton)
@@ -81,88 +172,13 @@ struct CrossSectionView: View {
                             .presentationDetents([.medium, .large]) // Takse half screen by default, can be expanded to fit whole screen
                             .presentationDragIndicator(.visible) // Adds a drag indicator
                     }
-                    //}
-                    
-                } header: {
-                    Text("Input parameters")
-                    
+                    .buttonStyle(PlainButtonStyle())
                 }
-                
-                // Result display (currents, recomended cross-secton and fuses)
-                Section {
-                    
-                    VStack(spacing: 20) {
-                        // Current Results
-                        VStack(alignment: .leading, spacing: 10) {
-                            HStack {
-                                Image(systemName: "bolt.fill")
-                                    .foregroundColor(.yellow)
-                                Text("1-Phase Current:")
-                                    .bold()
-                                Spacer()
-                                Text(resultCurrent1Phase ?? "- A")
-                                    .foregroundColor(.blue)
-                            }
-                            .padding()
-                            .background(Color.gray.opacity(0.1))
-                            .cornerRadius(8)
-                            
-                            HStack {
-                                Image(systemName: "bolt.circle.fill")
-                                    .foregroundColor(.orange)
-                                Text("3-Phase Current:")
-                                    .bold()
-                                Spacer()
-                                Text(resultCurrent3Phase ?? "- A")
-                                    .foregroundColor(.blue)
-                            }
-                            .padding()
-                            .background(Color.gray.opacity(0.1))
-                            .cornerRadius(8)
-                        }
-                        
-                        // Copper Results
-                        VStack(alignment: .leading, spacing: 10) {
-                            HStack {
-                                Image(systemName: "c.square.fill")
-                                    .foregroundColor(.brown)
-                                Text("Copper:")
-                                    .bold()
-                                Spacer()
-                                Text(resultRecomendedCableCu ?? "⌀: -, Fuse: -")
-                                    .foregroundColor(.green)
-                            }
-                            .padding()
-                            .background(Color.gray.opacity(0.1))
-                            .cornerRadius(8)
-                        }
-                        
-                        // Aluminum Results
-                        VStack(alignment: .leading, spacing: 10) {
-                            HStack {
-                                Image(systemName: "a.square.fill")
-                                    .foregroundColor(.gray)
-                                Text("Aluminum:")
-                                    .bold()
-                                Spacer()
-                                Text(resultRecomendedCableAl ?? "⌀: -, Fuse: -")
-                                    .foregroundColor(.green)
-                            }
-                            .padding()
-                            .background(Color.gray.opacity(0.1))
-                            .cornerRadius(8)
-                        }
-                    }
-
-                    Spacer()
-
-                    } header: {
-                        Text("Results")
-                    }
-                    
-                }
-                //.padding()
+                .padding(.top, 8)
+            }
+            
         }
+    }
     
     // Calculation logic
     private func calculateCurrent() {

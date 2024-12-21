@@ -16,17 +16,20 @@ struct BusbarTableView: View {
         VStack(alignment: .leading) {
             Text("Recommended Copper Busbar Sizes")
                 .font(.title3)
+                .foregroundColor(.white)
                 .bold()
                 .padding(.bottom, 10)
             
             // Table Header
             HStack {
-                Text("WxH (mm²)")
+                Text("WxH (mm)")
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(.white)
                 Text("Max current (A)")
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .center)
+                    .foregroundColor(.white)
             }
             .padding()
             .background(Color.gray.opacity(0.2))
@@ -40,7 +43,8 @@ struct BusbarTableView: View {
                     Text(row.maxCurrentForBusbar)
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
-                .padding(.vertical, 5)
+                .font(.headline)
+                .padding(5)
                 .background(Color.white)
                 .cornerRadius(5)
                 .shadow(radius: 1)
@@ -52,7 +56,7 @@ struct BusbarTableView: View {
                         .foregroundColor(.white)
                         .padding()
                         .background(Color.red)
-                        .cornerRadius(8)
+                        .cornerRadius(5)
                 }
             }
             .frame(maxWidth: .infinity)

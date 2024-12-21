@@ -118,7 +118,6 @@ struct VoltageDropView: View {
                                 .frame(maxWidth: .infinity)
                                 .onTapGesture {
                                     sharedData.isManualEntryCrossSection = true
-                                    print("Tapped")
                                 }
                                 .onAppear {
                                     if !sharedData.isManualEntryCrossSection {
@@ -144,7 +143,6 @@ struct VoltageDropView: View {
                             if !sharedData.isManualEntryCrossSection {
                                 updateCrossSectionBasedOnMaterial()
                             }
-                            print(sharedData.isManualEntryCrossSection)
                         }
                     }
                 } header: {
@@ -198,11 +196,9 @@ struct VoltageDropView: View {
         if sharedData.selectedMaterial == "Cu" {
             // Set the best copper cross-section if the material is Cu
             sharedData.cableCrossSection = sharedData.bestCopperCrossSection
-            print(sharedData.bestCopperCrossSection)
         } else {
             // Set the best aluminum cross-section if the material is Al
             sharedData.cableCrossSection = sharedData.bestAluminumCrossSection
-            print(sharedData.bestAluminumCrossSection)
         }
     }
     
