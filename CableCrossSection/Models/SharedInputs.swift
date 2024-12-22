@@ -17,8 +17,10 @@ class SharedDataModel: ObservableObject {
     
     @Published var selectedCopperRow: DataVariables?
     @Published var selectedAluminumRow: DataVariables?
+    @Published var selectedBusbarRow: BusbarDataVariables?
     @Published var bestCopperCrossSection: String = ""
     @Published var bestAluminumCrossSection: String = ""
+    @Published var bestSuitableBusbar: String = ""
     @Published var isManualEntryCrossSection = false
     @Published var showBusbarButton = false
     @Published var showBusbarSheet = false

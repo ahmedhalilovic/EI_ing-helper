@@ -74,12 +74,12 @@ struct CableLoadData {
 
 struct BusbarLoadData {
     static let busbarData: [BusbarDataVariables] = [
-    BusbarDataVariables(size: "10x3 mm", stacked: "1", maxCurrentForBusbar: "146 A"),
-    BusbarDataVariables(size: "20x3 mm", stacked: "1", maxCurrentForBusbar: "204 A"),
-    BusbarDataVariables(size: "20x5 mm", stacked: "1", maxCurrentForBusbar: "274 A"),
-    BusbarDataVariables(size: "30x5 mm", stacked: "1", maxCurrentForBusbar: "379 A"),
-    BusbarDataVariables(size: "30x10 mm", stacked: "1", maxCurrentForBusbar: "573 A"),
-    BusbarDataVariables(size: "40x10 mm", stacked: "1", maxCurrentForBusbar: "715 A"),
+    BusbarDataVariables(size: "10x3", stacked: "1", maxCurrentForBusbar: "146"),
+    BusbarDataVariables(size: "20x3", stacked: "1", maxCurrentForBusbar: "204"),
+    BusbarDataVariables(size: "20x5", stacked: "1", maxCurrentForBusbar: "274"),
+    BusbarDataVariables(size: "30x5", stacked: "1", maxCurrentForBusbar: "379"),
+    BusbarDataVariables(size: "30x10", stacked: "1", maxCurrentForBusbar: "573"),
+    BusbarDataVariables(size: "40x10", stacked: "1", maxCurrentForBusbar: "715"),
     ]
 }
 

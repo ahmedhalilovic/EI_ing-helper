@@ -17,15 +17,16 @@ struct CrossSectionView: View {
     @State private var resultCurrent3Phase: String? = nil
     @State private var resultRecomendedCableCu: String? = nil
     @State private var resultRecomendedCableAl: String? = nil
+    @State private var resultRecommendedBusbar: String? = nil
     
     var body: some View {
         Form {
             Section {
                 HStack {
                     Group {
-                        InputField(title: "Power (kW)", text: $sharedData.powerKW)
+                        InputField(title: Bundle.localizedString(key: "power_text"), text: $sharedData.powerKW)
                         //.keyboardToolbar()
-                        Picker("Power factor (cos φ)",
+                        Picker(Bundle.localizedString(key: "power_factor_text"),
                                selection: $sharedData.powerFactor) {
                             ForEach(0...100, id: \.self) { index in
                                 let value = Double(index) / 100.0
@@ -53,7 +54,7 @@ struct CrossSectionView: View {
                             calculateCurrent()
                             sharedData.showBusbarButton = true // Show the busbar button after calculation
                         }) {
-                            Text("Calculate")
+                            Text(Bundle.localizedString(key: "calculate"))
                                 .font(.headline)
                                 .padding()
                                 .background(Color.blue)
@@ -67,11 +68,12 @@ struct CrossSectionView: View {
                 }
                 
             } header: {
-                Text("Input parameters")
+                Text(Bundle.localizedString(key: "input_parameters"))
                 
             }
             
-            // Result display (currents, recomended cross-secton and fuses)
+            // MARK: Result display
+            // (currents, recomended cross-secton and fuses)
             Section {
                 
                 VStack(spacing: 20) {
@@ -80,7 +82,7 @@ struct CrossSectionView: View {
                         HStack {
                             Image(systemName: "bolt.fill")
                                 .foregroundColor(.yellow)
-                            Text("1-Phase Current:")
+                            Text(Bundle.localizedString(key: "one_phase_current"))
                                 .bold()
                             Spacer()
                             Text(resultCurrent1Phase ?? "- A")
@@ -93,7 +95,7 @@ struct CrossSectionView: View {
                         HStack {
                             Image(systemName: "bolt.circle.fill")
                                 .foregroundColor(.orange)
-                            Text("3-Phase Current:")
+                            Text(Bundle.localizedString(key: "three_phase_current"))
                                 .bold()
                             Spacer()
                             Text(resultCurrent3Phase ?? "- A")
@@ -141,7 +143,7 @@ struct CrossSectionView: View {
                 
             } header: {
                 HStack {
-                    Text("Results")
+                    Text(Bundle.localizedString(key: "result"))
                     
                     Spacer()
                     
@@ -150,9 +152,9 @@ struct CrossSectionView: View {
                     }) {
                         HStack {
                             VStack {
-                                Text("BUSBAR")
+                                Text(Bundle.localizedString(key: "busbar_cap_first"))
                                     .font(.system(size: 12, weight: .semibold))
-                                Text("SIZE")
+                                Text(Bundle.localizedString(key: "busbar_cap_second"))
                                     .font(.system(size: 12, weight: .semibold))
                                 
                             }
@@ -180,11 +182,12 @@ struct CrossSectionView: View {
         }
     }
     
-    // Calculation logic
+    // MARK: Calculation logic
     private func calculateCurrent() {
         guard let power = Double(sharedData.powerKW),
               power > 0 else {
-            resultCurrent1Phase = "Invalid input."
+            resultCurrent1Phase = Bundle.localizedString(key: "invalid_input_current")
+            resultCurrent3Phase = Bundle.localizedString(key: "invalid_input_current")
             return
         }
         
@@ -215,7 +218,7 @@ struct CrossSectionView: View {
         } else {
             resultRecomendedCableCu = "No suitable copper cable found."
         }
-        
+        // Determine the best fit for aluminum
         if let aluminumBest = findBestOption(for: current3f, options: closestAluminumOptions, keyPath: \.fuseForAl) {
             resultRecomendedCableAl = "⌀: \(aluminumBest.crossSection) mm2, Fuse: \(aluminumBest.fuseForAl) A"
             sharedData.bestAluminumCrossSection = aluminumBest.crossSection
@@ -226,6 +229,22 @@ struct CrossSectionView: View {
         // Update the best suited crosssection and fuses in Table Tab
         sharedData.selectedCopperRow = findBestOption(for: current3f, options: closestCopperOptions, keyPath: \.fuseForCu)
         sharedData.selectedAluminumRow = findBestOption(for: current3f, options: closestAluminumOptions, keyPath: \.fuseForAl)
+        
+        // Calculate the best busbar option
+        let busbarOptions = BusbarLoadData.busbarData.filter {
+            (Double($0.maxCurrentForBusbar) ?? 0) >= current3f
+        }
+
+        if let bestBusbar = findBestBusbarOption(for: current3f, options: busbarOptions) {
+            resultRecommendedBusbar = "Size: \(bestBusbar.size), Stacked: \(bestBusbar.stacked), Max Current: \(bestBusbar.maxCurrentForBusbar) A"
+            sharedData.bestSuitableBusbar = bestBusbar.maxCurrentForBusbar
+        } else {
+            resultRecommendedBusbar = "No suitable busbar found."
+            sharedData.bestSuitableBusbar = "-"
+        }
+
+        // Update SharedData for the Busbar Tab
+        sharedData.selectedBusbarRow = findBestBusbarOption(for: current3f, options: busbarOptions)
         
         sharedData.isManualEntryCrossSection = false // Reset to false when current is calculated again
     }
@@ -255,6 +274,25 @@ struct CrossSectionView: View {
         }
         
         return sorted.first?.option
+    }
+    
+    private func findBestBusbarOption(for current: Double, options: [BusbarDataVariables]) -> BusbarDataVariables? {
+        guard !options.isEmpty else { return nil }
+        
+        // Filter options to ensure max current is at least 30% higher than the calculated current
+        let validOptions = options.filter { option in
+            guard let maxCurrent = Double(option.maxCurrentForBusbar) else { return false }
+            return maxCurrent >= current * 1.3
+        }
+        
+        // Sort valid options by proximity to the current
+        let sortedOptions = validOptions.sorted {
+            guard let current1 = Double($0.maxCurrentForBusbar),
+                  let current2 = Double($1.maxCurrentForBusbar) else { return false }
+            return abs(current1 - current) < abs(current2 - current)
+        }
+        
+        return sortedOptions.first
     }
 }
 

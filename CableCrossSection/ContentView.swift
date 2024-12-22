@@ -15,29 +15,37 @@ struct ContentView: View {
             NavigationStack {
                     CrossSectionView()
                     .environmentObject(sharedData)
-                        .navigationTitle("Cross-section")
+                    .navigationTitle(Bundle.localizedString(key: "navigation_title_cross_section", comment: "Title for cross-section tab"))
                 }
                 .tabItem {
-                    Label("Cross Section", systemImage: "circle.grid.cross.up.filled")
+                    Label(Bundle.localizedString(key: "tab_label_cross_section"), systemImage: "circle.grid.cross.up.filled")
                 }
 
                 NavigationStack {
                     TableView()
                         .environmentObject(sharedData)
-                        .navigationTitle("Cable load")
+                        //.navigationTitle(Bundle.localizedString(key: "navigation_title_cable_load"))
                 }
                 .tabItem {
-                    Label("Table", systemImage: "tablecells")
+                    Label(Bundle.localizedString(key: "tab_label_table"), systemImage: "tablecells")
                 }
 
                 NavigationStack {
                     VoltageDropView()
                         .environmentObject(sharedData)
-                        .navigationTitle("Voltage Drop")
+                        .navigationTitle(Bundle.localizedString(key: "navigation_title_voltage_drop"))
                 }
                 .tabItem {
-                    Label("Voltage Drop", systemImage: "bolt.slash.fill")
+                    Label(Bundle.localizedString(key: "tab_label_voltage_drop"), systemImage: "bolt.slash.fill")
                 }
+            
+            NavigationStack {
+                SettingsView()
+                    .navigationTitle(Bundle.localizedString(key: "navigation_title_settings"))
+            }
+            .tabItem {
+                Label(Bundle.localizedString(key: "tab_label_settings"), systemImage: "gear")
+            }
         
         }
     }

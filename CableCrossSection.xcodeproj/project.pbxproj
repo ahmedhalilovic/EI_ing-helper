@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		EB086F6F2D0E565D00D2F218 /* BusbarTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB086F6E2D0E565D00D2F218 /* BusbarTableView.swift */; };
+		EB086F712D1700B100D2F218 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB086F702D1700B100D2F218 /* SettingsView.swift */; };
+		EB086F732D1705A700D2F218 /* BundleLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB086F722D1705A600D2F218 /* BundleLanguage.swift */; };
+		EB086F762D17092500D2F218 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB086F782D17092500D2F218 /* Localizable.strings */; };
 		EB10B2BA2CE3C3FD005AA66F /* CableCrossSectionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB10B2B92CE3C3FD005AA66F /* CableCrossSectionApp.swift */; };
 		EB10B2BC2CE3C3FD005AA66F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB10B2BB2CE3C3FD005AA66F /* ContentView.swift */; };
 		EB10B2BE2CE3C401005AA66F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB10B2BD2CE3C401005AA66F /* Assets.xcassets */; };
@@ -23,6 +26,10 @@
 
 /* Begin PBXFileReference section */
 		EB086F6E2D0E565D00D2F218 /* BusbarTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusbarTableView.swift; sourceTree = "<group>"; };
+		EB086F702D1700B100D2F218 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		EB086F722D1705A600D2F218 /* BundleLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleLanguage.swift; sourceTree = "<group>"; };
+		EB086F772D17092500D2F218 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EB086F792D17092A00D2F218 /* bs-BA */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "bs-BA"; path = "bs-BA.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		EB10B2B62CE3C3FD005AA66F /* CableCrossSection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CableCrossSection.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB10B2B92CE3C3FD005AA66F /* CableCrossSectionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CableCrossSectionApp.swift; sourceTree = "<group>"; };
 		EB10B2BB2CE3C3FD005AA66F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,13 +74,13 @@
 		EB10B2B82CE3C3FD005AA66F /* CableCrossSection */ = {
 			isa = PBXGroup;
 			children = (
-				EBE3CE0D2CEA7F760090C639 /* KeyboardToolbarModifier.swift */,
 				EB10B2B92CE3C3FD005AA66F /* CableCrossSectionApp.swift */,
 				EB7B45DC2D0365AD003AB588 /* Views */,
 				EB7B45E12D04C155003AB588 /* Models */,
 				EBE3CE0F2CF0FEBB0090C639 /* TableData.swift */,
 				EB10B2BB2CE3C3FD005AA66F /* ContentView.swift */,
 				EB10B2BD2CE3C401005AA66F /* Assets.xcassets */,
+				EB086F782D17092500D2F218 /* Localizable.strings */,
 				EB10B2BF2CE3C401005AA66F /* Preview Content */,
 			);
 			path = CableCrossSection;
@@ -95,6 +102,7 @@
 				EB7B45DF2D0367ED003AB588 /* VoltageDropView.swift */,
 				EB4F5E4D2D08D7D60004A6C5 /* CompensationCalcuatorView.swift */,
 				EB086F6E2D0E565D00D2F218 /* BusbarTableView.swift */,
+				EB086F702D1700B100D2F218 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -103,6 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				EB7B45E22D04C555003AB588 /* SharedInputs.swift */,
+				EBE3CE0D2CEA7F760090C639 /* KeyboardToolbarModifier.swift */,
+				EB086F722D1705A600D2F218 /* BundleLanguage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -149,6 +159,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"bs-BA",
 			);
 			mainGroup = EB10B2AD2CE3C3FD005AA66F;
 			productRefGroup = EB10B2B72CE3C3FD005AA66F /* Products */;
@@ -166,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB10B2C12CE3C401005AA66F /* Preview Assets.xcassets in Resources */,
+				EB086F762D17092500D2F218 /* Localizable.strings in Resources */,
 				EB10B2BE2CE3C401005AA66F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,15 +194,29 @@
 				EB086F6F2D0E565D00D2F218 /* BusbarTableView.swift in Sources */,
 				EBE3CE0E2CEA7F760090C639 /* KeyboardToolbarModifier.swift in Sources */,
 				EB7B45E02D0367ED003AB588 /* VoltageDropView.swift in Sources */,
+				EB086F732D1705A700D2F218 /* BundleLanguage.swift in Sources */,
 				EB10B2BA2CE3C3FD005AA66F /* CableCrossSectionApp.swift in Sources */,
 				EB10B2C82CE3C4EE005AA66F /* CrossSectionView.swift in Sources */,
 				EBE3CE102CF0FEBB0090C639 /* TableData.swift in Sources */,
 				EB10B2CC2CE3C6C0005AA66F /* TableView.swift in Sources */,
 				EB7B45E32D04C555003AB588 /* SharedInputs.swift in Sources */,
+				EB086F712D1700B100D2F218 /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		EB086F782D17092500D2F218 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB086F772D17092500D2F218 /* en */,
+				EB086F792D17092A00D2F218 /* bs-BA */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		EB10B2C22CE3C401005AA66F /* Debug */ = {

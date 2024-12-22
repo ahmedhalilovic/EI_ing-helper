@@ -1,0 +1,60 @@
+// Content, main view
+"navigation_title_cross_section" = "Cross-section";
+"tab_label_cross_section" = "Cross Section";
+"navigation_title_cable_load" = "Tables";
+"tab_label_table" = "Table";
+"navigation_title_voltage_drop" = "Voltage Drop";
+"tab_label_voltage_drop" = "Voltage Drop";
+"navigation_title_settings" = "Settings";
+"tab_label_settings" = "Settings";
+
+// Crossection tab
+"invalid_input_current" = "Invalid input.";
+"busbar_cap_first" = "BUSBAR";
+"busbar_cap_second" = "SIZE";
+"one_phase_current" = "1-Phase Current:";
+"three_phase_current" = "";
+"" = "";
+
+// Cable load table
+"tables" = "Tables";
+"table_title" = "Cable Load Table";
+"table_cable_name" = "Cable Load";
+"header_cross_section" = "Cross-Section mm2";
+"header_max_current_cu" = "Max Current (Cu)";
+"header_fuse_cu" = "Fuse (Cu)";
+"header_max_current_al" = "Max Current (Al)";
+"header_fuse_al" = "Fuse (Al)";
+"legend_copper" = "Copper";
+"legend_aluminum" = "Aluminum";
+"button_show_busbar_currents" = "SHOW BUSBAR\nCURRENTS";
+//Busbar table
+"table_busbar_name" = "Busbar";
+"recomended_busbar_sizes" = "Busbar table";
+"busbar_size_title" = "Size in mm";
+"stacked_title" = "Stacked";
+"max_current_column_title" = "Max current (A)";
+"close" = "Close";
+
+// Voltage drop tab
+"power_text" = "Power (kW)";
+"power_factor_text" = "Power factor (cos φ)";
+"voltage_text" = "Voltage (V)";
+"voltage_shadow" = "voltage";
+"cable_length_text" = "Cable length (m)";
+"cable_cross_section_text" = "Cable cross-section (mm2)";
+"condictivity_text" = "Conductivity:";
+"cable_material_text" = "Cable material (Sm/mm2)";
+"picker_copper" = "Copper = 56";
+"picker_aluminum" = "Aluminum = 35";
+"input_parameters" = "Input parameters";
+"calculate" = "Calculate";
+"result" = "Result";
+"result_voltage_drop_invalid" = "Invalid input. Please enter valid numbers.";
+"result_current" = "Calculated Current: ";
+"result_voltage" = "Voltage Drop: ";
+"result_max_cable_length" = "Maximum Cable length: ";
+
+// Settings tab
+"language" = "Language";
+"language_selection" = "Choose language";

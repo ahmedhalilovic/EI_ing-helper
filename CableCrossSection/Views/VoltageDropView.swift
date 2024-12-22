@@ -40,10 +40,10 @@ struct VoltageDropView: View {
 //                        .padding(.horizontal)
                         
                         HStack {
-                            Text("Power (kW)")
+                            Text(Bundle.localizedString(key: "power_text"))
                                 .font(.subheadline)
                                 .frame(maxWidth: .infinity)
-                            TextField("(kW)", text: $sharedData.powerKW)
+                            TextField("[kW]", text: $sharedData.powerKW)
                                 .keyboardType(.numberPad)
                                 .multilineTextAlignment(.center)
                                 .padding(5)
@@ -53,7 +53,7 @@ struct VoltageDropView: View {
                                 .frame(maxWidth: .infinity)
                         }
                         HStack {
-                            Text("Power factor (cos φ)")
+                            Text(Bundle.localizedString(key: "power_factor_text"))
                                 .font(.subheadline)
                                 .multilineTextAlignment(.center)
                                 .frame(maxWidth: .infinity)
@@ -78,10 +78,10 @@ struct VoltageDropView: View {
                             
                         }
                         HStack {
-                            Text("Voltage (V)")
+                            Text(Bundle.localizedString(key: "voltage_text"))
                                 .font(.subheadline)
                                 .frame(maxWidth: .infinity)
-                            TextField("Voltage", text: $sharedData.voltage)
+                            TextField("[V]", text: $sharedData.voltage)
                                 .keyboardType(.numberPad)
                                 .multilineTextAlignment(.center)
                                 .padding(5)
@@ -91,10 +91,10 @@ struct VoltageDropView: View {
                                 .frame(maxWidth: .infinity)
                         }
                         HStack {
-                            Text("Cable length (m)")
+                            Text(Bundle.localizedString(key: "cable_length_text"))
                                 .font(.subheadline)
                                 .frame(maxWidth: .infinity)
-                            TextField("(m)", text: $sharedData.cableLength)
+                            TextField("[m]", text: $sharedData.cableLength)
                                 .keyboardType(.decimalPad)
                                 .multilineTextAlignment(.center)
                                 .padding(5)
@@ -104,11 +104,11 @@ struct VoltageDropView: View {
                                 .frame(maxWidth: .infinity)
                         }
                         HStack {
-                            Text("Cable cross-section (mm2)")
+                            Text(Bundle.localizedString(key: "cable_cross_section_text"))
                                 .font(.subheadline)
                                 .multilineTextAlignment(.center)
                                 .frame(maxWidth: .infinity)
-                            TextField("(mm2)", text: $sharedData.cableCrossSection)
+                            TextField("[mm2]", text: $sharedData.cableCrossSection)
                                 .keyboardType(.numberPad)
                                 .multilineTextAlignment(.center)
                                 .padding(5)
@@ -130,13 +130,13 @@ struct VoltageDropView: View {
 
                     //Cable conductivity picker
                     VStack {
-                        Text("Conductivity:")
+                        Text(Bundle.localizedString(key: "condictivity_text"))
                             .font(.subheadline)
                             .frame(maxWidth: .infinity, alignment: .leading)
 
                         Picker("Cable material (Sm/mm2)", selection: $sharedData.selectedMaterial) {
-                            Text("Copper = 56").tag("Cu")
-                            Text("Aluminum = 35").tag("Al")
+                            Text(Bundle.localizedString(key: "picker_copper")).tag("Cu")
+                            Text(Bundle.localizedString(key: "picker_aluminum")).tag("Al")
                         }
                         .pickerStyle(SegmentedPickerStyle())
                         .onChange(of: sharedData.selectedMaterial) { newValue in
@@ -146,7 +146,7 @@ struct VoltageDropView: View {
                         }
                     }
                 } header: {
-                    Text("Input parameters")
+                    Text(Bundle.localizedString(key: "input_parameters"))
                 }
 
                 Section {
@@ -154,7 +154,7 @@ struct VoltageDropView: View {
                         //Calculate button
                         HStack {
                             Spacer()
-                            Button("Calculate") {
+                            Button(Bundle.localizedString(key: "calculate")) {
                                 showResult()
                             }
                             .padding()
@@ -172,18 +172,65 @@ struct VoltageDropView: View {
                             .multilineTextAlignment(.center)
                             .padding(.bottom, 10)
 
-                        //Resul display
+                        //Result display
                         if !resultVoltageDrop.isEmpty {
                             Section {
                                 Text(resultVoltageDrop)
                             } header: {
-                                Text("Result")
+                                Text(Bundle.localizedString(key: "result"))
                             }
                         }
+                        VStack(spacing: 5) {
+                            HStack {
+                                VStack {
+                                    Image(systemName: "bolt.fill") // Symbol for current
+                                        .font(.system(size: 15))
+                                        .foregroundColor(.blue)
+                                    Text("Current")
+                                        .font(.headline)
+                                    Text("ahmed A")
+                                        .font(.title2)
+                                        .bold()
+                                }
+                                .frame(maxWidth: .infinity)
+
+                                VStack {
+                                    Image(systemName: "waveform.path.ecg") // Symbol for voltage drop
+                                        .font(.system(size: 15))
+                                        .foregroundColor(.green)
+                                    Text("Voltage Drop")
+                                        .font(.headline)
+                                    Text("ahmed ")
+                                        .font(.title2)
+                                        .bold()
+                                }
+                                .frame(maxWidth: .infinity)
+                            }
+                            .padding()
+                            .background(Color(UIColor.secondarySystemBackground))
+                            .cornerRadius(8)
+
+                            Divider()
+                                .padding(.vertical, 5)
+
+                            VStack {
+                                Text("Maximum Cable Length")
+                                    .font(.headline)
+                                    .foregroundColor(.secondary)
+                                Text("ahmed  m")
+                                    .font(.title2)
+                                    .bold()
+                            }
+                            .padding()
+                            .background(Color(UIColor.secondarySystemBackground))
+                            .cornerRadius(10)
+                        }
+                        .padding()
+
                     }
                     .background(Color.clear)
                 } header: {
-                    Text("Result")
+                    Text(Bundle.localizedString(key: "result"))
                 }
 
 
@@ -207,7 +254,7 @@ struct VoltageDropView: View {
               let voltageValue = Double(sharedData.voltage),
               let lengthValue = Double(sharedData.cableLength),
               let crossSectionValue = Double(sharedData.cableCrossSection) else {
-            resultVoltageDrop = "Invalid input. Please enter valid numbers."
+            resultVoltageDrop = Bundle.localizedString(key: "result_voltage_drop_invalid")
             return
         }
         

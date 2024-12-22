@@ -1,0 +1,57 @@
+// Content, main view
+"navigation_title_cross_section" = "Poprečni presjek";
+"tab_label_cross_section" = "Presjek";
+"navigation_title_cable_load" = "Opterećenje kabla";
+"tab_label_table" = "Tabela";
+"navigation_title_voltage_drop" = "Pad napona";
+"tab_label_voltage_drop" = "Pad napona";
+"navigation_title_settings" = "Postavke";
+"tab_label_settings" = "Postavke";
+
+// Crossection tab
+"invalid_input_current" = "Pogrešan unos";
+"busbar_cap_first" = "SABIRNICA";
+"busbar_cap_second" = "";
+
+// Cable load table
+"tables" = "Tabele";
+"table_title" = "Opterećenje kabla";
+"header_cross_section" = "Presjek mm2";
+"table_cable_name" = "Presjek kabla";
+"header_max_current_cu" = "Max Struja (Cu)";
+"header_fuse_cu" = "Osigurač (Cu)";
+"header_max_current_al" = "Max Struja (Al)";
+"header_fuse_al" = "Osigurač (Al)";
+"legend_copper" = "Bakar";
+"legend_aluminum" = "Aluminij";
+"button_show_busbar_currents" = "PRIKAŽI\nSTRUJE SABIRNICE";
+// Busbar table
+"table_busbar_name" = "Sabirnica";
+"recomended_busbar_sizes" = "Tabela sabirnica";
+"busbar_size_title" = "Veličina u mm";
+"stacked_title" = "Količina";
+"max_current_column_title" = "Max struja (A)";
+"close" = "Zatvori";
+
+// Voltage drop tab
+"power_text" = "Snaga (kW)";
+"power_factor_text" = "Power factor (cos φ)";
+"voltage_text" = "Napon (V)";
+"cable_length_text" = "Dužina kabla (m)";
+"cable_cross_section_text" = "Presjek kabla (mm2)";
+"condictivity_text" = "Provodnost:";
+"cable_material_text" = "Materijal (Sm/mm2)";
+"picker_copper" = "Bakar = 56";
+"picker_aluminum" = "Aluminij = 35";
+"input_parameters" = "Ulazni podatci";
+"calculate" = "Izračunaj";
+"result" = "Rezultat";
+"result_voltage_drop_invalid" = "Netačan unos. Molimo unesite validne vrijednosti.";
+"result_current" = "Struja: ";
+"result_voltage" = "Pad napona: ";
+"result_max_cable_length" = "Max dužina kabla: ";
+
+// Settings tab
+"language" = "Jezik";
+"language_selection" = "Odaberi jezik";
+
