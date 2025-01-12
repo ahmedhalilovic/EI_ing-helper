@@ -13,11 +13,7 @@ struct TableView: View {
     
     let tables = [Bundle.localizedString(key: "table_cable_name"), Bundle.localizedString(key: "table_busbar_name")] // Picker options
     
-    //    let CableData = CableLoadData.cableData
-    //    let BusbarData = BusbarLoadData.busbarData
-    
     var body: some View {
-        //NavigationView {
             ScrollView {
                 VStack {
                     Picker("Select Table", selection: $selectedTable) {
@@ -39,11 +35,6 @@ struct TableView: View {
             }
             .navigationTitle(Bundle.localizedString(key: "tables")) // Main navigation title
             .navigationBarTitleDisplayMode(.large) // Large title enabled
-            
-        //}
-//        .navigationTitle("Tables")
-//        .navigationBarTitleDisplayMode(.large) // Shrinks the navigation title
-//        .padding(.horizontal)
     }
 }
 
@@ -76,46 +67,48 @@ struct CableLoadView: View {
             .bold()
             .background(Color.gray.opacity(0.2))
             ForEach(CableData, id: \.id) { row in
+                let isCopperRow = sharedData.selectedCopperRow
+                let isAluminumRow = sharedData.selectedAluminumRow
+                
                 HStack {
                     Text(row.crossSection)
                         .frame(maxWidth: .infinity)
                         .padding(5)
                         .bold()
                         .background(
-                            sharedData.selectedCopperRow == row ? Color(red: 0.72, green: 0.45, blue: 0.20, opacity: 0.5) : // Copper-like color
-                            sharedData.selectedAluminumRow == row ? Color(red: 0.65, green: 0.65, blue: 0.65, opacity: 0.7) : // Aluminum-like color
+                            isCopperRow == row ? Color(red: 0.72, green: 0.45, blue: 0.20, opacity: 0.5) : // Copper-like color
+                            isAluminumRow == row ? Color(red: 0.65, green: 0.65, blue: 0.65, opacity: 0.7) : // Aluminum-like color
                             Color.clear
                         )
                     Text(row.maxCurrentCu)
                         .frame(maxWidth: .infinity)
                         .padding(5)
                         .background(
-                            sharedData.selectedCopperRow == row ? Color(red: 0.72, green: 0.45, blue: 0.20, opacity: 0.5) :
+                            isCopperRow == row ? Color(red: 0.72, green: 0.45, blue: 0.20, opacity: 0.5) :
                             Color.clear
                         )
                     Text(row.fuseForCu)
                         .frame(maxWidth: .infinity)
                         .padding(5)
                         .background(
-                            sharedData.selectedCopperRow == row ? Color(red: 0.72, green: 0.45, blue: 0.20, opacity: 0.5) :
+                            isCopperRow == row ? Color(red: 0.72, green: 0.45, blue: 0.20, opacity: 0.5) :
                             Color.clear
                         )
                     Text(row.maxCurrentAl.isEmpty ? "-" : row.maxCurrentAl)
                         .frame(maxWidth: .infinity)
                         .padding(5)
                         .background(
-                            sharedData.selectedAluminumRow == row ? Color(red: 0.65, green: 0.65, blue: 0.65, opacity: 0.7) :
+                            isAluminumRow == row ? Color(red: 0.65, green: 0.65, blue: 0.65, opacity: 0.7) :
                             Color.clear
                         )
                     Text(row.fuseForAl.isEmpty ? "-" : row.fuseForAl)
                         .frame(maxWidth: .infinity)
                         .padding(5)
                         .background(
-                            sharedData.selectedAluminumRow == row ? Color(red: 0.65, green: 0.65, blue: 0.65, opacity: 0.7) :
+                            isAluminumRow == row ? Color(red: 0.65, green: 0.65, blue: 0.65, opacity: 0.7) :
                             Color.clear
                         )
                 }
-                //.padding(.vertical, 2)
                 .background(Color.gray.opacity(0.1))
                 .cornerRadius(5)
             }
@@ -147,6 +140,7 @@ struct BusbarView: View {
             .font(.subheadline)
             .bold()
             .background(Color.gray.opacity(0.2))
+        
             ForEach(BusbarData, id: \.id) { row in
                 HStack {
                     Text(row.size).frame(maxWidth: .infinity)

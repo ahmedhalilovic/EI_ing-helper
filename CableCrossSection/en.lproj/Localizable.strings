@@ -13,8 +13,10 @@
 "busbar_cap_first" = "BUSBAR";
 "busbar_cap_second" = "SIZE";
 "one_phase_current" = "1-Phase Current:";
-"three_phase_current" = "";
-"" = "";
+"three_phase_current" = "3-Phase Current:";
+"copper_result_text" = "Copper: ";
+"aluminum_result_text" = "Aluminum:";
+"fuse_text" = "Fuse:";
 
 // Cable load table
 "tables" = "Tables";
@@ -51,10 +53,14 @@
 "calculate" = "Calculate";
 "result" = "Result";
 "result_voltage_drop_invalid" = "Invalid input. Please enter valid numbers.";
-"result_current" = "Calculated Current: ";
+"result_current" = "Current: ";
 "result_voltage" = "Voltage Drop: ";
 "result_max_cable_length" = "Maximum Cable length: ";
 
 // Settings tab
 "language" = "Language";
 "language_selection" = "Choose language";
+"app_version" = "App version";
+"about_info" = "About app";
+"app_version_message" = "App v1.0";
+"about_info_message" = "This app helps you calculate cable cross-sections, voltage drops, and other electrical parameters.";

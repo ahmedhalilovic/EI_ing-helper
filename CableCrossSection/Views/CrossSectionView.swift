@@ -9,14 +9,17 @@ import SwiftUI
 import Foundation
 
 struct CrossSectionView: View {
+    @FocusState private var isPowerInputFieldFocused: Bool // Focus state for the power input field
     @EnvironmentObject var sharedData: SharedDataModel
     
 //    @State private var powerKW = ""
 //    @State private var powerFactor: Double = 0.95
     @State private var resultCurrent1Phase: String? = nil
     @State private var resultCurrent3Phase: String? = nil
-    @State private var resultRecomendedCableCu: String? = nil
-    @State private var resultRecomendedCableAl: String? = nil
+    @State private var resultRecomendedCableCuCrossSection: String? = nil
+    @State private var resultRecomendedCableCuFuse: String? = nil
+    @State private var resultRecomendedCableAlCrossSection: String? = nil
+    @State private var resultRecomendedCableAlFuse: String? = nil
     @State private var resultRecommendedBusbar: String? = nil
     
     var body: some View {
@@ -25,7 +28,9 @@ struct CrossSectionView: View {
                 HStack {
                     Group {
                         InputField(title: Bundle.localizedString(key: "power_text"), text: $sharedData.powerKW)
-                        //.keyboardToolbar()
+                            .focused($isPowerInputFieldFocused)
+                            .frame(minWidth: 180, maxWidth: .infinity)
+                            //.keyboardToolbar()
                         Picker(Bundle.localizedString(key: "power_factor_text"),
                                selection: $sharedData.powerFactor) {
                             ForEach(0...100, id: \.self) { index in
@@ -36,6 +41,7 @@ struct CrossSectionView: View {
                         }
                                .pickerStyle(WheelPickerStyle())
                                .frame(height: 120)
+                               .frame(maxWidth: 140)
                                .background(Color.white)
                                .frame(maxWidth: .infinity)
                                .onAppear {
@@ -68,8 +74,20 @@ struct CrossSectionView: View {
                 }
                 
             } header: {
-                Text(Bundle.localizedString(key: "input_parameters"))
-                
+                HStack { // Title and the Clear button
+                    Text(Bundle.localizedString(key: "input_parameters"))
+                    Button(action: {
+                        // Action to clear the input fields
+                        clearInputs()
+                    }) {
+                        Image(systemName: "trash.fill") // Trash icon
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                            .padding(0)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                }
             }
             
             // MARK: Result display
@@ -111,11 +129,17 @@ struct CrossSectionView: View {
                         HStack {
                             Image(systemName: "c.square.fill")
                                 .foregroundColor(.brown)
-                            Text("Copper:")
+                            Text(Bundle.localizedString(key: "copper_result_text"))
                                 .bold()
                             Spacer()
-                            Text(resultRecomendedCableCu ?? "⌀: -, Fuse: -")
-                                .foregroundColor(.green)
+                            Text("⌀: ")
+                            Text(resultRecomendedCableCuCrossSection ?? "-, ")
+                                .foregroundColor(.blue)
+                            Image(systemName: "bandage")
+                                .foregroundColor(.black)
+                                .imageScale(.large)
+                            Text(resultRecomendedCableCuFuse ?? ": - A")
+                                .foregroundColor(.blue)
                         }
                         .padding()
                         .background(Color.gray.opacity(0.1))
@@ -127,11 +151,17 @@ struct CrossSectionView: View {
                         HStack {
                             Image(systemName: "a.square.fill")
                                 .foregroundColor(.gray)
-                            Text("Aluminum:")
+                            Text(Bundle.localizedString(key: "aluminum_result_text"))
                                 .bold()
                             Spacer()
-                            Text(resultRecomendedCableAl ?? "⌀: -, Fuse: -")
-                                .foregroundColor(.green)
+                            Text("⌀: ")
+                            Text(resultRecomendedCableAlCrossSection ?? "-, ")
+                                .foregroundColor(.blue)
+                            Image(systemName: "bandage")
+                                .foregroundColor(.black)
+                                .imageScale(.large)
+                            Text(resultRecomendedCableAlFuse ?? ": - A")
+                                .foregroundColor(.blue)
                         }
                         .padding()
                         .background(Color.gray.opacity(0.1))
@@ -180,6 +210,11 @@ struct CrossSectionView: View {
             }
             
         }
+        .onAppear{
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                isPowerInputFieldFocused = true
+            }
+        }
     }
     
     // MARK: Calculation logic
@@ -213,17 +248,19 @@ struct CrossSectionView: View {
         
         // Determine the best fit for copper
         if let copperBest = findBestOption(for: current3f, options: closestCopperOptions, keyPath: \.fuseForCu) {
-            resultRecomendedCableCu = "⌀: \(copperBest.crossSection) mm2, Fuse: \(copperBest.fuseForCu) A"
-            sharedData.bestCopperCrossSection = copperBest.crossSection
+            resultRecomendedCableCuCrossSection = "\(copperBest.crossSection) mm2"
+            resultRecomendedCableCuFuse = ": \(copperBest.fuseForCu) A"
+            sharedData.bestCopperCrossSection = copperBest.crossSection // Use to automatically set the cross-section in Voltage drop tab
         } else {
-            resultRecomendedCableCu = "No suitable copper cable found."
+            resultRecomendedCableCuCrossSection = "No suitable copper cable found."
         }
         // Determine the best fit for aluminum
         if let aluminumBest = findBestOption(for: current3f, options: closestAluminumOptions, keyPath: \.fuseForAl) {
-            resultRecomendedCableAl = "⌀: \(aluminumBest.crossSection) mm2, Fuse: \(aluminumBest.fuseForAl) A"
-            sharedData.bestAluminumCrossSection = aluminumBest.crossSection
+            resultRecomendedCableAlCrossSection = "\(aluminumBest.crossSection) mm2"
+            resultRecomendedCableAlFuse = ": \(aluminumBest.fuseForAl) A"
+            sharedData.bestAluminumCrossSection = aluminumBest.crossSection // Use to utomatically set the cross-section in Voltage drop tab
         } else {
-            resultRecomendedCableAl = "No suitable copper cable found."
+            resultRecomendedCableAlCrossSection = "No suitable aluminum cable found."
         }
         
         // Update the best suited crosssection and fuses in Table Tab
@@ -249,50 +286,21 @@ struct CrossSectionView: View {
         sharedData.isManualEntryCrossSection = false // Reset to false when current is calculated again
     }
     
-    private func findBestOption(for current: Double, options: [DataVariables], keyPath: KeyPath<DataVariables, String>) -> DataVariables? {
-        guard !options.isEmpty else { return nil }
-        
-        // Calculate proximity to each option
-        let withProximity = options.compactMap { option -> (option: DataVariables, proximity: Double)? in
-            guard let maxCurrent = Double(option[keyPath: keyPath]) else { return nil }
-            return (option, abs(maxCurrent - current))
-        }
-        
-        // Sort by proximity
-        let sorted = withProximity.sorted(by: { $0.proximity < $1.proximity })
-        
-        // Ensure we pick a slightly larger option if close to the smaller one
-        if let closest = sorted.first,
-           let secondClosest = sorted.dropFirst().first {
-            let closestCurrent = Double(closest.option[keyPath: keyPath])!
-            //let secondClosestCurrent = Double(secondClosest.option[keyPath: keyPath])!
-
-            // If the current is closer to the smaller option but exceeds 90% of its value, prefer the larger option
-            if current >= closestCurrent * 0.9 && current < closestCurrent {
-                return secondClosest.option
-            }
-        }
-        
-        return sorted.first?.option
-    }
-    
-    private func findBestBusbarOption(for current: Double, options: [BusbarDataVariables]) -> BusbarDataVariables? {
-        guard !options.isEmpty else { return nil }
-        
-        // Filter options to ensure max current is at least 30% higher than the calculated current
-        let validOptions = options.filter { option in
-            guard let maxCurrent = Double(option.maxCurrentForBusbar) else { return false }
-            return maxCurrent >= current * 1.3
-        }
-        
-        // Sort valid options by proximity to the current
-        let sortedOptions = validOptions.sorted {
-            guard let current1 = Double($0.maxCurrentForBusbar),
-                  let current2 = Double($1.maxCurrentForBusbar) else { return false }
-            return abs(current1 - current) < abs(current2 - current)
-        }
-        
-        return sortedOptions.first
+    // Clear Function to celar all data inputs and results
+    private func clearInputs() {
+        sharedData.powerKW = ""
+        sharedData.powerFactor = 0.95
+        sharedData.showBusbarButton = false // Hide "BUSBAR SIZE" button
+        sharedData.selectedCopperRow = nil
+        sharedData.selectedAluminumRow = nil
+        sharedData.selectedBusbarRow = nil
+        resultCurrent1Phase = nil
+        resultCurrent3Phase = nil
+        resultRecomendedCableCuCrossSection = nil
+        resultRecomendedCableCuFuse = nil
+        resultRecomendedCableAlCrossSection = nil
+        resultRecomendedCableAlFuse = nil
+        resultRecommendedBusbar = nil
     }
 }
 
@@ -306,7 +314,7 @@ struct InputField: View {
                 .font(.subheadline)
                 .foregroundColor(.gray)
             TextField(title, text: $text)
-                .keyboardType(.decimalPad)
+                //.keyboardType(.decimalPad)
                 .padding()
                 .background(Color(.systemGray6))
                 .cornerRadius(8)

@@ -10,12 +10,17 @@ import SwiftUI
 struct SettingsView: View {
     @AppStorage("selectedLanguage") private var selectedLanguage: String = "en"
     
+    @State private var showAppVersion = false
+    @State private var showAboutMePopup = false
+    
     var body: some View {
         Form {
             Section {
-                Picker(Bundle.localizedString(key: "language"), selection: $selectedLanguage) {
-                    Text("English").tag("en")
-                    Text("Bosanski").tag("bs-BA")
+                VStack {
+                    Picker(Bundle.localizedString(key: "language"), selection: $selectedLanguage) {
+                        Text("English").tag("en")
+                        Text("Bosanski").tag("bs-BA")
+                    }
                 }
             } header: {
                 Text(Bundle.localizedString(key: "language_selection"))
@@ -26,7 +31,36 @@ struct SettingsView: View {
             .onChange(of: selectedLanguage) { newValue in
                 Bundle.setLanguage(newValue)
             }
-
+            
+            Section {
+                Button {
+                    showAppVersion = true
+                } label: {
+                    Text(Bundle.localizedString(key: "app_version"))
+                }
+                .foregroundColor(.black)
+                .alert(Bundle.localizedString(key: "app_version"), isPresented: $showAppVersion) {
+                    Button("OK", role: .cancel) { }
+                } message: {
+                    Text(Bundle.localizedString(key: "app_version_message"))
+                }
+                
+                
+                Button {
+                    showAboutMePopup = true
+                } label: {
+                    Text(Bundle.localizedString(key: "about_info"))
+                }
+                .foregroundColor(.black)
+                .alert(Bundle.localizedString(key: "about_info"), isPresented: $showAboutMePopup) {
+                    Button("OK", role: .cancel) { }
+                } message: {
+                    Text(Bundle.localizedString(key: "about_info_message"))
+                }
+                
+            } header: {
+                Text("Info")
+            }
         }
     }
 }

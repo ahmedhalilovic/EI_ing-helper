@@ -22,6 +22,7 @@
 		EB7B45E32D04C555003AB588 /* SharedInputs.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7B45E22D04C555003AB588 /* SharedInputs.swift */; };
 		EBE3CE0E2CEA7F760090C639 /* KeyboardToolbarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE3CE0D2CEA7F760090C639 /* KeyboardToolbarModifier.swift */; };
 		EBE3CE102CF0FEBB0090C639 /* TableData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE3CE0F2CF0FEBB0090C639 /* TableData.swift */; };
+		EBFE94272D33295C00D7E005 /* SharedFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBFE94262D33295C00D7E005 /* SharedFunctions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		EB7B45E22D04C555003AB588 /* SharedInputs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedInputs.swift; sourceTree = "<group>"; };
 		EBE3CE0D2CEA7F760090C639 /* KeyboardToolbarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardToolbarModifier.swift; sourceTree = "<group>"; };
 		EBE3CE0F2CF0FEBB0090C639 /* TableData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableData.swift; sourceTree = "<group>"; };
+		EBFE94262D33295C00D7E005 /* SharedFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 				EB10B2B92CE3C3FD005AA66F /* CableCrossSectionApp.swift */,
 				EB7B45DC2D0365AD003AB588 /* Views */,
 				EB7B45E12D04C155003AB588 /* Models */,
+				EBFE94252D33293200D7E005 /* Helpers */,
 				EBE3CE0F2CF0FEBB0090C639 /* TableData.swift */,
 				EB10B2BB2CE3C3FD005AA66F /* ContentView.swift */,
 				EB10B2BD2CE3C401005AA66F /* Assets.xcassets */,
@@ -115,6 +118,14 @@
 				EB086F722D1705A600D2F218 /* BundleLanguage.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		EBFE94252D33293200D7E005 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				EBFE94262D33295C00D7E005 /* SharedFunctions.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +206,7 @@
 				EBE3CE0E2CEA7F760090C639 /* KeyboardToolbarModifier.swift in Sources */,
 				EB7B45E02D0367ED003AB588 /* VoltageDropView.swift in Sources */,
 				EB086F732D1705A700D2F218 /* BundleLanguage.swift in Sources */,
+				EBFE94272D33295C00D7E005 /* SharedFunctions.swift in Sources */,
 				EB10B2BA2CE3C3FD005AA66F /* CableCrossSectionApp.swift in Sources */,
 				EB10B2C82CE3C4EE005AA66F /* CrossSectionView.swift in Sources */,
 				EBE3CE102CF0FEBB0090C639 /* TableData.swift in Sources */,
@@ -269,7 +281,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -323,7 +335,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -338,6 +350,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CableCrossSection/Preview Content\"";
@@ -347,8 +360,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -367,6 +381,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CableCrossSection/Preview Content\"";
@@ -376,8 +391,9 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

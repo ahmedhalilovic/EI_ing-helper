@@ -14,37 +14,44 @@ struct BusbarTableView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Recommended Copper Busbar Sizes")
+            Text(Bundle.localizedString(key: "recomended_busbar_sizes"))
                 .font(.title3)
+                
                 .foregroundColor(.white)
                 .bold()
                 .padding(.bottom, 10)
             
             // Table Header
             HStack {
-                Text("WxH (mm)")
+                Text(Bundle.localizedString(key: "busbar_size_title"))
                     .bold()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundColor(.white)
-                Text("Max current (A)")
+                    .frame(maxWidth: .infinity)
+                Text(Bundle.localizedString(key: "stacked_title"))
                     .bold()
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                Text(Bundle.localizedString(key: "max_current_column_title"))
+                    .bold()
+                    .frame(maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
             }
-            .padding()
-            .background(Color.gray.opacity(0.2))
+            .font(.subheadline)
+            .bold()
+            .foregroundColor(.white)
             .cornerRadius(10)
             
             // Data Rows
-            ForEach(busbarData) { row in
+            ForEach(busbarData, id: \.id) { row in
                 HStack {
-                    Text(row.size)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Text(row.maxCurrentForBusbar)
-                        .frame(maxWidth: .infinity, alignment: .center)
+                    Text(row.size).frame(maxWidth: .infinity)
+                    Text(row.stacked).frame(maxWidth: .infinity)
+                    Text(row.maxCurrentForBusbar).frame(maxWidth: .infinity)
                 }
-                .font(.headline)
-                .padding(5)
+                .padding(.vertical, 5)
+                .foregroundColor(.black)
+                .background(
+                    sharedData.selectedBusbarRow == row ? Color(red: 0.72, green: 0.45, blue: 0.20, opacity: 0.75) : // Busbar color
+                    Color.clear
+                )
                 .background(Color.white)
                 .cornerRadius(5)
                 .shadow(radius: 1)
@@ -53,9 +60,9 @@ struct BusbarTableView: View {
             HStack {
                 Button(action: { sharedData.showBusbarSheet = false }) {
                     Text("Close")
-                        .foregroundColor(.white)
+                        .foregroundColor(.red)
                         .padding()
-                        .background(Color.red)
+                        .background(Color.white)
                         .cornerRadius(5)
                 }
             }
@@ -63,16 +70,7 @@ struct BusbarTableView: View {
             .padding()
         }
         .padding()
-        .background(
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    Color(red: 0.72, green: 0.45, blue: 0.20), // Copper color
-                    Color(red: 0.52, green: 0.35, blue: 0.15) // Darker copper
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-        )
+        .background(.gray)
         .cornerRadius(15)
         
     }

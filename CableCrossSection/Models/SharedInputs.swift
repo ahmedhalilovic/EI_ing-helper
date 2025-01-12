@@ -15,6 +15,8 @@ class SharedDataModel: ObservableObject {
     @Published var cableCrossSection: String = ""
     @Published var selectedMaterial: String = "Cu"
     
+    @Published var calculatedCurrent: Double = 0
+    @Published var voltageDrop: Double = 0
     @Published var selectedCopperRow: DataVariables?
     @Published var selectedAluminumRow: DataVariables?
     @Published var selectedBusbarRow: BusbarDataVariables?

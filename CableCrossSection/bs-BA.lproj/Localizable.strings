@@ -12,6 +12,11 @@
 "invalid_input_current" = "Pogrešan unos";
 "busbar_cap_first" = "SABIRNICA";
 "busbar_cap_second" = "";
+"one_phase_current" = "1-Fazna struja:";
+"three_phase_current" = "3-Fazna struja:";
+"copper_result_text" = "Cu: ";
+"aluminum_result_text" = "Al:";
+"fuse_text" = "Osigurač:";
 
 // Cable load table
 "tables" = "Tabele";
@@ -54,4 +59,8 @@
 // Settings tab
 "language" = "Jezik";
 "language_selection" = "Odaberi jezik";
+"app_version" = "Verzija aplikacije";
+"about_info" = "O aplikaciji";
+"app_version_message" = "Verzija v1.0";
+"about_info_message" = "Ova aplikacija vam pomaže da izračunate poprečne presjeke kabela, pad napona i druge električne parametre.";
 
