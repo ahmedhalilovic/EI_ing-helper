@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct CompensationCalcuatorView: View {
+    @EnvironmentObject var sharedData: SharedDataModel
+    
     // Input fields
     @State private var activePower: String = "" // kW
     @State private var reactiveEnergy: String = "" // kVARh
     @State private var operatingHours: String = "" // hours
-    @State private var targetPowerFactor: String = "" // e.g., 0.98
+    @State private var targetPowerFactor: Double = 0 // e.g., 0.98
 
     // Output result
     @State private var requiredCapacitor: String = ""
@@ -20,9 +22,6 @@ struct CompensationCalcuatorView: View {
     var body: some View {
         NavigationView {
             VStack(spacing: 20) {
-                Text("Capacitor Size Calculator")
-                    .font(.title)
-                    .bold()
 
                 // Input fields
                 Group {
@@ -37,10 +36,32 @@ struct CompensationCalcuatorView: View {
                     TextField("Operating Hours (hours)", text: $operatingHours)
                         .keyboardType(.decimalPad)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-
-                    TextField("Target Power Factor (e.g., 0.98)", text: $targetPowerFactor)
-                        .keyboardType(.decimalPad)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    
+                    HStack {
+                        Text(Bundle.localizedString(key: "power_factor_text"))
+                            .font(.subheadline)
+                            .multilineTextAlignment(.center)
+                            .frame(maxWidth: .infinity)
+                        HStack {
+                            Picker("Power Factor (cos φ)", selection: $targetPowerFactor) {
+                                ForEach(0...100, id: \.self) { index in
+                                    let value = Double(index) / 100.0
+                                    Text(String(format: "%.2f", value))
+                                        .tag(value)
+                                }
+                            }
+                            .pickerStyle(WheelPickerStyle())
+                            .frame(height: 80)
+                            .background(Color.white)
+                            .frame(maxWidth: .infinity)
+                            .onAppear {
+                                if targetPowerFactor == 0 {
+                                    targetPowerFactor = 0.99
+                                }
+                            }
+                        }
+                        
+                    }
                 }
 
                 // Calculate Button
@@ -65,7 +86,7 @@ struct CompensationCalcuatorView: View {
                 Spacer()
             }
             .padding()
-            .navigationTitle("Capacitor Calculator")
+            .navigationTitle(Bundle.localizedString(key: "compensation_sheet_name"))
         }
     }
 
@@ -74,8 +95,7 @@ struct CompensationCalcuatorView: View {
         guard let p = Double(activePower),
               let kvarh = Double(reactiveEnergy),
               let hours = Double(operatingHours),
-              let targetPF = Double(targetPowerFactor),
-              targetPF > 0, targetPF < 1 else {
+              targetPowerFactor > 0, targetPowerFactor < 1 else {
             requiredCapacitor = "Invalid input. Please check your values."
             return
         }
@@ -85,7 +105,7 @@ struct CompensationCalcuatorView: View {
 
         // Calculate target reactive power
         let tanPhi1 = sqrt(1 / pow(0.993, 2) - 1) // Assuming initial PF is 0.993
-        let tanPhi2 = sqrt(1 / pow(targetPF, 2) - 1)
+        let tanPhi2 = sqrt(1 / pow(targetPowerFactor, 2) - 1)
         let q2 = p * tanPhi2
 
         // Required compensation

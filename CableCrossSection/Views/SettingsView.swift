@@ -10,6 +10,7 @@ import SwiftUI
 struct SettingsView: View {
     @AppStorage("selectedLanguage") private var selectedLanguage: String = "en"
     
+    @State private var showCompensationSheet = false
     @State private var showAppVersion = false
     @State private var showAboutMePopup = false
     
@@ -30,6 +31,22 @@ struct SettingsView: View {
             }
             .onChange(of: selectedLanguage) { newValue in
                 Bundle.setLanguage(newValue)
+            }
+            
+            Section {
+                Button {
+                    showCompensationSheet = true
+                } label: {
+                    Text(Bundle.localizedString(key: "compensation_button_text"))
+                }
+                .sheet(isPresented: $showCompensationSheet) { // Display sheet when button is pressed
+                    CompensationCalcuatorView()
+                }
+                .buttonStyle(PlainButtonStyle())
+                
+
+            } header: {
+                Text(Bundle.localizedString(key: "more_helpers"))
             }
             
             Section {

@@ -59,6 +59,9 @@
 // Settings tab
 "language" = "Jezik";
 "language_selection" = "Odaberi jezik";
+"compensation_sheet_name" = "Kalkulator kompenzacije";
+"more_helpers" = "Dodatne kalkulacije";
+"compensation_button_text" = "KALKULATOR KOMPENZACIJE";
 "app_version" = "Verzija aplikacije";
 "about_info" = "O aplikaciji";
 "app_version_message" = "Verzija v1.0";
