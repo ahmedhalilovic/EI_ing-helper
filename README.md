@@ -2,6 +2,21 @@
 
 CableCalc is an electrical engineering tool designed to simplify cable selection by calculating voltage drop, cable cross-section, and fuse selection based on input parameters.
 
+## Screenshots
+
+- **Cross Section:** Calculate cross section based on input power.
+<img src="Screenshots/Cross Section tab.png" alt="Cross section tab" width="200"/>
+- **Busbar sheet:**
+<img src="Screenshots/Cross Section Busbar small.png" alt="Busbar sheet" width="200"/>
+- **Cable load table:** Display cable load table.
+<img src="Screenshots/Tables Cable load.png" alt="Cable load table" width="200"/>
+- **Busbar table:** Display busbar load table.
+<img src="Screenshots/Tables Busbar.png" alt="Busbar table" width="200"/>
+- **Voltage drop:** Calculate voltage based on input
+<img src="Screenshots/Voltage Drop tab.png" alt="Voltage drop tab" width="200"/>
+- **Settings:**
+<img src="Screenshots/Setting tab.png" alt="Settings tab" width="200"/>
+
 ## Features
 
 ### **1. Cross Section Selection**
