@@ -63,6 +63,9 @@
 "compensation_sheet_name" = "Compensation Calculator";
 "more_helpers" = "More helpers";
 "compensation_button_text" = "COMPENSATION CALCULATOR";
+"compensation_sheet_name" = "COMPENSATION CALCULATOR";
+"reactive_energy_text" = "Reactive Energy (kVAR)";
+"operating_hours_text" = "Operating Hours";
 "app_version" = "App version";
 "about_info" = "About app";
 "app_version_message" = "App v1.0";

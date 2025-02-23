@@ -62,6 +62,9 @@
 "compensation_sheet_name" = "Kalkulator kompenzacije";
 "more_helpers" = "Dodatne kalkulacije";
 "compensation_button_text" = "KALKULATOR KOMPENZACIJE";
+"compensation_sheet_name" = "KALKULATOR KOMPENZACIJE";
+"reactive_energy_text" = "Reaktivna Energija (kVAR)";
+"operating_hours_text" = "Sati";
 "app_version" = "Verzija aplikacije";
 "about_info" = "O aplikaciji";
 "app_version_message" = "Verzija v1.0";
