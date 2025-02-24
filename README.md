@@ -16,6 +16,8 @@ CableCalc is an electrical engineering tool designed to simplify cable selection
 <img src="Screenshots/Voltage Drop tab.png" alt="Voltage drop tab" width="200"/>
 - **Settings:**
 <img src="Screenshots/Setting tab.png" alt="Settings tab" width="200"/>
+- **Compensation Calculator:**
+<img src="Screenshots/Compensation Calculator sheet.png" alt="Compensation Calculator" width="200"/>
 
 ## Features
 
