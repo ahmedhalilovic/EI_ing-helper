@@ -113,7 +113,7 @@ struct CompensationCalcuatorView: View {
                 // MARK: Result section
                 Section { // Display result
                     VStack {
-                        Text("Required Capacitor Size:")
+                        Text(Bundle.localizedString(key: "compensation_result_text"))
                             .font(.headline)
                             .multilineTextAlignment(.center)
                     }
@@ -181,7 +181,7 @@ struct CompensationCalcuatorView: View {
               let kvarh = Double(reactiveEnergy),
               let hours = Double(operatingHours),
               targetPowerFactor > 0, targetPowerFactor < 1 else {
-            requiredCapacitor = "Invalid input. Please check your values."
+            requiredCapacitor = Bundle.localizedString(key: "invalid_input_compensation_text")
             return
         }
 

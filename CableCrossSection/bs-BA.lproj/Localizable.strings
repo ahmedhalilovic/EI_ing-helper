@@ -65,6 +65,8 @@
 "compensation_sheet_name" = "KALKULATOR KOMPENZACIJE";
 "reactive_energy_text" = "Reaktivna Energija (kVAR)";
 "operating_hours_text" = "Sati";
+"compensation_result_text" = "Potrebna velicina kondenzatorske baterije:";
+"invalid_input_compensation_text" = "Nepravilan unos. Provjerite vase vrijednosti.";
 "app_version" = "Verzija aplikacije";
 "about_info" = "O aplikaciji";
 "app_version_message" = "Verzija v1.0";

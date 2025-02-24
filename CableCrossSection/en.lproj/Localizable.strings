@@ -66,6 +66,8 @@
 "compensation_sheet_name" = "COMPENSATION CALCULATOR";
 "reactive_energy_text" = "Reactive Energy (kVAR)";
 "operating_hours_text" = "Operating Hours";
+"compensation_result_text" = "Required Capacitor Battery Size:";
+"invalid_input_compensation_text" = "Invalid input. Please check your values.";
 "app_version" = "App version";
 "about_info" = "About app";
 "app_version_message" = "App v1.0";
