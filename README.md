@@ -11,7 +11,7 @@ CableCalc is an electrical engineering tool designed to simplify cable selection
 - **Cable load table:** Display cable load table.
 <img src="Screenshots/Tables Cable load.png" alt="Cable load table" width="200"/>
 - **Busbar table:** Display busbar load table.
-<img src="Screenshots/Tables Busbar.png" alt="Busbar table" width="200"/>
+<img src="Screenshots/Tables Busbar .png" alt="Busbar table" width="200"/>
 - **Voltage drop:** Calculate voltage based on input
 <img src="Screenshots/Voltage Drop tab.png" alt="Voltage drop tab" width="200"/>
 - **Settings:**
