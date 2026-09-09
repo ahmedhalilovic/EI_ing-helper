@@ -9,44 +9,47 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var sharedData = SharedDataModel()
-    
+    @AppStorage("selectedTab") private var selectedTab = 0
+
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             NavigationStack {
-                    CrossSectionView()
+                CrossSectionView()
                     .environmentObject(sharedData)
-                    .navigationTitle(Bundle.localizedString(key: "navigation_title_cross_section", comment: "Title for cross-section tab"))
-                }
-                .tabItem {
-                    Label(Bundle.localizedString(key: "tab_label_cross_section"), systemImage: "circle.grid.cross.up.filled")
-                }
-
-                NavigationStack {
-                    TableView()
-                        .environmentObject(sharedData)
-                        //.navigationTitle(Bundle.localizedString(key: "navigation_title_cable_load"))
-                }
-                .tabItem {
-                    Label(Bundle.localizedString(key: "tab_label_table"), systemImage: "tablecells")
-                }
-
-                NavigationStack {
-                    VoltageDropView()
-                        .environmentObject(sharedData)
-                        .navigationTitle(Bundle.localizedString(key: "navigation_title_voltage_drop"))
-                }
-                .tabItem {
-                    Label(Bundle.localizedString(key: "tab_label_voltage_drop"), systemImage: "bolt.slash.fill")
-                }
-            
-            NavigationStack {
-                SettingsView()
-                    .navigationTitle(Bundle.localizedString(key: "navigation_title_settings"))
+                    .navigationTitle("Cross-section")
             }
             .tabItem {
-                Label(Bundle.localizedString(key: "tab_label_settings"), systemImage: "gear")
+                Label("Cross Section", systemImage: "circle.grid.cross.up.filled")
             }
-        
+            .tag(0)
+
+            NavigationStack {
+                TableView()
+                    .environmentObject(sharedData)
+            }
+            .tabItem {
+                Label("Table", systemImage: "tablecells")
+            }
+            .tag(1)
+
+            NavigationStack {
+                VoltageDropView()
+                    .environmentObject(sharedData)
+                    .navigationTitle("Voltage Drop")
+            }
+            .tabItem {
+                Label("Voltage Drop", systemImage: "bolt.slash.fill")
+            }
+            .tag(2)
+
+            NavigationStack {
+                SettingsView()
+                    .navigationTitle("Settings")
+            }
+            .tabItem {
+                Label("Settings", systemImage: "gear")
+            }
+            .tag(3)
         }
     }
 }

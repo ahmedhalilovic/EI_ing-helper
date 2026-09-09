@@ -14,30 +14,28 @@ struct BusbarTableView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(Bundle.localizedString(key: "recomended_busbar_sizes"))
+            Text("Busbar table")
                 .font(.title3)
-                
-                .foregroundColor(.white)
+                .foregroundColor(.primary)
                 .bold()
                 .padding(.bottom, 10)
             
             // Table Header
             HStack {
-                Text(Bundle.localizedString(key: "busbar_size_title"))
+                Text("Size in mm")
                     .bold()
                     .frame(maxWidth: .infinity)
-                Text(Bundle.localizedString(key: "stacked_title"))
+                Text("Stacked")
                     .bold()
                     .frame(maxWidth: .infinity)
-                Text(Bundle.localizedString(key: "max_current_column_title"))
+                Text("Max current (A)")
                     .bold()
                     .frame(maxWidth: .infinity)
                     .multilineTextAlignment(.center)
             }
             .font(.subheadline)
             .bold()
-            .foregroundColor(.white)
-            .cornerRadius(10)
+            .foregroundColor(.primary)
             
             // Data Rows
             ForEach(busbarData, id: \.id) { row in
@@ -47,12 +45,11 @@ struct BusbarTableView: View {
                     Text(row.maxCurrentForBusbar).frame(maxWidth: .infinity)
                 }
                 .padding(.vertical, 5)
-                .foregroundColor(.black)
+                .foregroundColor(.primary)
                 .background(
-                    sharedData.selectedBusbarRow == row ? Color(red: 0.72, green: 0.45, blue: 0.20, opacity: 0.75) : // Busbar color
-                    Color.clear
+                    sharedData.selectedBusbarRow == row ? Color(red: 0.72, green: 0.45, blue: 0.20, opacity: 0.75) :
+                    Color(.systemBackground)
                 )
-                .background(Color.white)
                 .cornerRadius(5)
                 .shadow(radius: 1)
             }
@@ -60,24 +57,29 @@ struct BusbarTableView: View {
             HStack {
                 Button(action: { sharedData.showBusbarSheet = false }) {
                     Text("Close")
-                        .foregroundColor(.red)
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(5)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .frame(width: 120)
+                        .padding(.vertical, 10)
+                        .background(Color.red)
+                        .cornerRadius(10)
                 }
+                .buttonStyle(PlainButtonStyle())
             }
             .frame(maxWidth: .infinity)
             .padding()
         }
         .padding()
-        .background(.gray)
-        .cornerRadius(15)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.regularMaterial)
         
     }
 }
 
 struct BusbarTableView_Previews: PreviewProvider {
     static var previews: some View {
-        BusbarTableView()
+        let model = SharedDataModel()
+        return BusbarTableView()
+            .environmentObject(model)
     }
 }

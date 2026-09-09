@@ -8,73 +8,59 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @AppStorage("selectedLanguage") private var selectedLanguage: String = "en"
-    
+    @AppStorage("appLanguage") private var appLanguage = "en"
+
     @State private var showCompensationSheet = false
     @State private var showAppVersion = false
     @State private var showAboutMePopup = false
-    
+
     var body: some View {
         Form {
             Section {
-                VStack {
-                    Picker(Bundle.localizedString(key: "language"), selection: $selectedLanguage) {
-                        Text("English").tag("en")
-                        Text("Bosanski").tag("bs-BA")
-                    }
+                Picker("Language", selection: $appLanguage) {
+                    Text("English").tag("en")
+                    Text("Bosanski").tag("bs")
                 }
             } header: {
-                Text(Bundle.localizedString(key: "language_selection"))
+                Text("Choose language")
             }
-            .onAppear {
-                Bundle.setLanguage(selectedLanguage)
-            }
-            .onChange(of: selectedLanguage) { newValue in
-                Bundle.setLanguage(newValue)
-            }
-            
+
             Section {
                 Button {
                     showCompensationSheet = true
                 } label: {
-                    Text(Bundle.localizedString(key: "compensation_button_text"))
+                    Text("COMPENSATION CALCULATOR")
                 }
-                .sheet(isPresented: $showCompensationSheet) { // Display sheet when button is pressed
+                .sheet(isPresented: $showCompensationSheet) {
                     CompensationCalcuatorView()
                 }
                 .buttonStyle(PlainButtonStyle())
-                
-
             } header: {
-                Text(Bundle.localizedString(key: "more_helpers"))
+                Text("More helpers")
             }
-            
+
             Section {
                 Button {
                     showAppVersion = true
                 } label: {
-                    Text(Bundle.localizedString(key: "app_version"))
+                    Text("App version")
                 }
-                .foregroundColor(.black)
-                .alert(Bundle.localizedString(key: "app_version"), isPresented: $showAppVersion) {
+                .alert("App version", isPresented: $showAppVersion) {
                     Button("OK", role: .cancel) { }
                 } message: {
-                    Text(Bundle.localizedString(key: "app_version_message"))
+                    Text("App v1.0")
                 }
-                
-                
+
                 Button {
                     showAboutMePopup = true
                 } label: {
-                    Text(Bundle.localizedString(key: "about_info"))
+                    Text("About app")
                 }
-                .foregroundColor(.black)
-                .alert(Bundle.localizedString(key: "about_info"), isPresented: $showAboutMePopup) {
+                .alert("About app", isPresented: $showAboutMePopup) {
                     Button("OK", role: .cancel) { }
                 } message: {
-                    Text(Bundle.localizedString(key: "about_info_message"))
+                    Text("This app helps you calculate cable cross-sections, voltage drops, and other electrical parameters.")
                 }
-                
             } header: {
                 Text("Info")
             }

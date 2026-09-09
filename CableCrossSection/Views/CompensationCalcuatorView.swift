@@ -20,9 +20,11 @@ struct CompensationCalcuatorView: View {
 
     // Output result
     @State private var requiredCapacitor: String = ""
+    @State private var calculationError: String = ""
 
     var body: some View {
-        NavigationStack {
+        ZStack {
+          NavigationStack {
             Form {
                 // MARK: Input section
                 Section {
@@ -30,73 +32,85 @@ struct CompensationCalcuatorView: View {
                     // Input fields
                     Group {
                         HStack {
-                            Text(Bundle.localizedString(key: "power_text"))
+                            Text("Power (kW)")
                                 .font(.subheadline)
                                 .frame(maxWidth: .infinity)
                             TextField("[kW]", text: $activePower)
                                 .keyboardType(.decimalPad)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .multilineTextAlignment(.center)
+                                .padding(5)
+                                .background(Color(.systemBackground))
+                                .cornerRadius(8)
+                                .shadow(radius: 3)
+                                .frame(maxWidth: .infinity)
                                 .focused($isPowerInputFieldFocused)
                         }
                         HStack {
-                            Text(Bundle.localizedString(key: "reactive_energy_text"))
+                            Text("Reactive Energy (kVAR)")
                                 .font(.subheadline)
                                 .frame(maxWidth: .infinity)
                             TextField("[kVARh]", text: $reactiveEnergy)
                                 .keyboardType(.decimalPad)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .multilineTextAlignment(.center)
+                                .padding(5)
+                                .background(Color(.systemBackground))
+                                .cornerRadius(8)
+                                .shadow(radius: 3)
+                                .frame(maxWidth: .infinity)
                         }
                         HStack {
-                            Text(Bundle.localizedString(key: "operating_hours_text"))
+                            Text("Operating Hours")
                                 .font(.subheadline)
                                 .frame(maxWidth: .infinity)
                             TextField("[h]", text: $operatingHours)
                                 .keyboardType(.decimalPad)
-                                .textFieldStyle(RoundedBorderTextFieldStyle())
+                                .multilineTextAlignment(.center)
+                                .padding(5)
+                                .background(Color(.systemBackground))
+                                .cornerRadius(8)
+                                .shadow(radius: 3)
+                                .frame(maxWidth: .infinity)
                         }
                         HStack {
-                            Text(Bundle.localizedString(key: "power_factor_text"))
+                            Text("Power factor (cos φ)")
                                 .font(.subheadline)
                                 .multilineTextAlignment(.center)
                                 .frame(maxWidth: .infinity)
-                            HStack {
-                                Picker("Power Factor (cos φ)", selection: $targetPowerFactor) {
-                                    ForEach(0...100, id: \.self) { index in
-                                        let value = Double(index) / 100.0
-                                        Text(String(format: "%.2f", value))
-                                            .tag(value)
-                                    }
-                                }
-                                .pickerStyle(WheelPickerStyle())
-                                .frame(height: 80)
-                                .background(Color.white)
-                                .frame(maxWidth: .infinity)
-                                .onAppear {
-                                    if targetPowerFactor == 0 {
-                                        targetPowerFactor = 0.99
-                                    }
+                            Picker("Power Factor (cos φ)", selection: $targetPowerFactor) {
+                                ForEach(80...100, id: \.self) { index in
+                                    let value = Double(index) / 100.0
+                                    Text(String(format: "%.2f", value))
+                                        .tag(value)
                                 }
                             }
-                            
+                            .pickerStyle(WheelPickerStyle())
+                            .frame(height: 80)
+                            .frame(maxWidth: .infinity)
+                            .onAppear {
+                                if targetPowerFactor == 0 {
+                                    targetPowerFactor = 0.99
+                                }
+                            }
                         }
                     }
                     
                     // Calculate Button
-                    Button(action: calculateCapacitorSize) {
-                        Text("Calculate")
-                            .font(.headline)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.blue)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
+                    HStack {
+                        Spacer()
+                        Button(action: calculateCapacitorSize) {
+                            Text("Calculate")
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(8)
+                                .fontWeight(.bold)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        Spacer()
                     }
-                    .buttonStyle(PlainButtonStyle())
-
-                    Spacer()
                 } header: {
                     HStack {
-                        Text(Bundle.localizedString(key: "input_parameters"))
+                        Text("Input parameters")
                         Button(action: {
                             clearInputs()
                         }) {
@@ -113,13 +127,19 @@ struct CompensationCalcuatorView: View {
                 // MARK: Result section
                 Section { // Display result
                     VStack {
-                        Text(Bundle.localizedString(key: "compensation_result_text"))
+                        Text("Required Capacitor Battery Size:")
                             .font(.headline)
                             .multilineTextAlignment(.center)
                     }
-                    VStack {
+                    VStack(spacing: 8) {
+                        if !calculationError.isEmpty {
+                            Text(calculationError)
+                                .font(.footnote)
+                                .foregroundColor(.blue)
+                                .multilineTextAlignment(.center)
+                        }
                         if !requiredCapacitor.isEmpty {
-                            Text("\(requiredCapacitor)")
+                            Text(requiredCapacitor)
                                 .font(.largeTitle)
                                 .fontWeight(.bold)
                                 .multilineTextAlignment(.center)
@@ -129,9 +149,11 @@ struct CompensationCalcuatorView: View {
                     
                 } header: {
                     HStack {
-                        Text(Bundle.localizedString(key: "result"))
+                        Text("Result")
                         Button(action: {
                             // Equation display
+//                            isPowerInputFieldFocused = false
+//                            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                             infoDialogIsPresented = true
                         }) {
                             Image(systemName: "info.bubble") // Trash icon
@@ -141,37 +163,71 @@ struct CompensationCalcuatorView: View {
                                 .padding(0)
                         }
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                        .alert("Equation used", isPresented: $infoDialogIsPresented) {
-                            Button("OK", role: .cancel) { }
-                        } message: {
-                            Text("""
-                            Existing Reactive Power:
-                            Q₁ = kVARh / Hours
-                            
-                            Target Reactive Power:
-                            Q₂ = P × tan(φ₂),
-                            where tan(φ) = sqrt(1 / cos²(φ) - 1)
-                            
-                            Required Compensation:
-                            Qcomp = max(Q₁ - Q₂, 0)
-                            """)
-                            .font(.system(size: 16, weight: .medium, design: .monospaced))
-                            .foregroundColor(.gray)
-                                .multilineTextAlignment(.center)
-                                .padding(20)
-                        }
+
 
                     }
                 }
             }
-            .navigationTitle(Bundle.localizedString(key: "compensation_sheet_name")) // Adds title to sheet
-            .navigationBarTitleDisplayMode(.inline) // Makes title smaller and centered
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    isPowerInputFieldFocused = true
-                }
-            }
+            .navigationTitle("Compensation Calculator")
+            .navigationBarTitleDisplayMode(.inline)
+          }
+
+          // Overlay equation card
+          if infoDialogIsPresented {
+              Color.black.opacity(0.35)
+                  .ignoresSafeArea()
+                  .onTapGesture { withAnimation { infoDialogIsPresented = false } }
+
+              VStack(alignment: .leading, spacing: 16) {
+                  Text("Equation used")
+                      .font(.title3)
+                      .fontWeight(.semibold)
+                      .frame(maxWidth: .infinity, alignment: .center)
+
+                  Divider()
+
+                  VStack(alignment: .leading, spacing: 10) {
+                      Text("Existing Reactive Power:")
+                          .font(.subheadline).foregroundColor(.secondary)
+                      Text("Q₁ = kVARh / Hours")
+                          .font(.system(size: 15, design: .monospaced))
+
+                      Text("Target Reactive Power:")
+                          .font(.subheadline).foregroundColor(.secondary)
+                      Text("Q₂ = P × tan(φ₂)")
+                          .font(.system(size: 15, design: .monospaced))
+                      Text("tan(φ) = √(1 / cos²(φ) − 1)")
+                          .font(.system(size: 13, design: .monospaced))
+                          .foregroundColor(.secondary)
+
+                      Text("Required Compensation:")
+                          .font(.subheadline).foregroundColor(.secondary)
+                      Text("Qcomp = max(Q₁ − Q₂, 0)")
+                          .font(.system(size: 15, design: .monospaced))
+                  }
+
+                  Divider()
+
+                  Button(action: { withAnimation { infoDialogIsPresented = false } }) {
+                      Text("OK")
+                          .fontWeight(.semibold)
+                          .foregroundColor(.white)
+                          .frame(maxWidth: .infinity)
+                          .padding(.vertical, 10)
+                          .background(Color.red)
+                          .cornerRadius(10)
+                  }
+                  .buttonStyle(PlainButtonStyle())
+              }
+              .padding(24)
+              .background(.regularMaterial)
+              .cornerRadius(20)
+              .shadow(radius: 20)
+              .padding(.horizontal, 28)
+              .transition(.opacity.combined(with: .scale(scale: 0.95)))
+          }
         }
+        .animation(.easeInOut(duration: 0.2), value: infoDialogIsPresented)
     }
     
     // MARK: Functions
@@ -181,9 +237,11 @@ struct CompensationCalcuatorView: View {
               let kvarh = Double(reactiveEnergy),
               let hours = Double(operatingHours),
               targetPowerFactor > 0, targetPowerFactor < 1 else {
-            requiredCapacitor = Bundle.localizedString(key: "invalid_input_compensation_text")
+            calculationError = "Invalid input. Please check your values."
+            requiredCapacitor = ""
             return
         }
+        calculationError = ""
 
         // Calculate existing reactive power
         let q1 = kvarh / hours
@@ -205,6 +263,7 @@ struct CompensationCalcuatorView: View {
         operatingHours = ""
         targetPowerFactor = 0.99
         requiredCapacitor = ""
+        calculationError = ""
         
     }
 }

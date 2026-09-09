@@ -28,27 +28,41 @@ struct VoltageDropView: View {
             Section { // MARK: Input section
                 VStack {
                     HStack {
-                        Text(Bundle.localizedString(key: "power_text"))
+                        Text("Power (kW)")
                             .font(.subheadline)
                             .frame(maxWidth: .infinity)
                         TextField("[kW]", text: $sharedData.powerKW)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.decimalPad)
+                            .onChange(of: sharedData.powerKW) { newValue in
+                                let separator = Locale.current.decimalSeparator ?? "."
+                                var filtered = newValue.filter { $0.isNumber || String($0) == separator }
+                                if filtered.components(separatedBy: separator).count > 2 {
+                                    var parts = filtered.components(separatedBy: separator)
+                                    let first = parts.removeFirst()
+                                    filtered = first + separator + parts.joined().replacingOccurrences(of: separator, with: "")
+                                }
+                                if filtered == separator { filtered = "0" + separator }
+                                if filtered != newValue { sharedData.powerKW = filtered }
+                            }
                             .multilineTextAlignment(.center)
+                            .textInputAutocapitalization(.none)
+                            .autocorrectionDisabled()
                             .padding(5)
-                            .background(Color.white)
+                            .background(Color(.systemBackground))
                             .cornerRadius(8)
                             .shadow(radius: 3)
                             .frame(maxWidth: .infinity)
                             .focused($isPowerInputFieldFocused)
                     }
+                    
                     HStack {
-                        Text(Bundle.localizedString(key: "power_factor_text"))
+                        Text("Power factor (cos φ)")
                             .font(.subheadline)
                             .multilineTextAlignment(.center)
                             .frame(maxWidth: .infinity)
                         HStack {
                             Picker("Power Factor (cos φ)", selection: $sharedData.powerFactor) {
-                                ForEach(0...100, id: \.self) { index in
+                                ForEach(80...100, id: \.self) { index in
                                     let value = Double(index) / 100.0
                                     Text(String(format: "%.2f", value))
                                         .tag(value)
@@ -56,7 +70,6 @@ struct VoltageDropView: View {
                             }
                             .pickerStyle(WheelPickerStyle())
                             .frame(height: 80)
-                            .background(Color.white)
                             .frame(maxWidth: .infinity)
                             .onAppear {
                                 if sharedData.powerFactor == 0 {
@@ -66,42 +79,64 @@ struct VoltageDropView: View {
                         }
                         
                     }
+                    
                     HStack {
-                        Text(Bundle.localizedString(key: "voltage_text"))
+                        Text("Voltage (V)")
                             .font(.subheadline)
                             .frame(maxWidth: .infinity)
                         TextField("[V]", text: $sharedData.voltage)
                             .keyboardType(.numberPad)
+                            .onChange(of: sharedData.voltage) { newValue in
+                                let filtered = newValue.filter { $0.isNumber }
+                                if filtered != newValue { sharedData.voltage = filtered }
+                            }
                             .multilineTextAlignment(.center)
                             .padding(5)
-                            .background(Color.white)
+                            .background(Color(.systemBackground))
                             .cornerRadius(8)
                             .shadow(radius: 3)
                             .frame(maxWidth: .infinity)
                     }
+                    
                     HStack {
-                        Text(Bundle.localizedString(key: "cable_length_text"))
+                        Text("Cable length (m)")
                             .font(.subheadline)
                             .frame(maxWidth: .infinity)
                         TextField("[m]", text: $sharedData.cableLength)
                             .keyboardType(.decimalPad)
+                            .onChange(of: sharedData.cableLength) { newValue in
+                                let separator = Locale.current.decimalSeparator ?? "."
+                                var filtered = newValue.filter { $0.isNumber || String($0) == separator }
+                                if filtered.components(separatedBy: separator).count > 2 {
+                                    var parts = filtered.components(separatedBy: separator)
+                                    let first = parts.removeFirst()
+                                    filtered = first + separator + parts.joined().replacingOccurrences(of: separator, with: "")
+                                }
+                                if filtered == separator { filtered = "0" + separator }
+                                if filtered != newValue { sharedData.cableLength = filtered }
+                            }
                             .multilineTextAlignment(.center)
                             .padding(5)
-                            .background(Color.white)
+                            .background(Color(.systemBackground))
                             .cornerRadius(8)
                             .shadow(radius: 3)
                             .frame(maxWidth: .infinity)
                     }
+                    
                     HStack {
-                        Text(Bundle.localizedString(key: "cable_cross_section_text"))
+                        Text("Cable cross-section (mm2)")
                             .font(.subheadline)
                             .multilineTextAlignment(.center)
                             .frame(maxWidth: .infinity)
                         TextField("[mm2]", text: $sharedData.cableCrossSection)
                             .keyboardType(.numberPad)
+                            .onChange(of: sharedData.cableCrossSection) { newValue in
+                                let filtered = newValue.filter { $0.isNumber }
+                                if filtered != newValue { sharedData.cableCrossSection = filtered }
+                            }
                             .multilineTextAlignment(.center)
                             .padding(5)
-                            .background(Color.white)
+                            .background(Color(.systemBackground))
                             .cornerRadius(8)
                             .shadow(radius: 3)
                             .frame(maxWidth: .infinity)
@@ -116,16 +151,17 @@ struct VoltageDropView: View {
                     }
                     
                 }
+                .keyboardToolbar()
                 
                 //Cable conductivity picker
                 VStack {
-                    Text(Bundle.localizedString(key: "condictivity_text"))
+                    Text("Conductivity:")
                         .font(.subheadline)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
                     Picker("Cable material (Sm/mm2)", selection: $sharedData.selectedMaterial) {
-                        Text(Bundle.localizedString(key: "picker_copper")).tag("Cu")
-                        Text(Bundle.localizedString(key: "picker_aluminum")).tag("Al")
+                        Text("Copper = 56").tag("Cu")
+                        Text("Aluminum = 35").tag("Al")
                     }
                     .pickerStyle(SegmentedPickerStyle())
                     .onChange(of: sharedData.selectedMaterial) { newValue in
@@ -134,9 +170,27 @@ struct VoltageDropView: View {
                         }
                     }
                 }
+                
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        isPowerInputFieldFocused = false
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        showResult()
+                    }) {
+                        Text("Calculate")
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(8)
+                            .fontWeight(.bold)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    Spacer()
+                }
             } header: {
                 HStack { // Title and the Clear button
-                    Text(Bundle.localizedString(key: "input_parameters"))
+                    Text("Input parameters")
                     Button(action: {
                         // Action to clear the input fields
                         clearInputs()
@@ -154,27 +208,12 @@ struct VoltageDropView: View {
             // MARK: Result section
             Section {
                 VStack {
-                    //Calculate button
-                    HStack(spacing: 20) {
-                        Button(action: {
-                            showResult()
-                        }) {
-                            Text(Bundle.localizedString(key: "calculate"))
-                                .padding()
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(8)
-                                .fontWeight(.bold)
-                        }
-                        .buttonStyle(PlainButtonStyle())
-                    }
-                    
                     //Result display
                     if !resultVoltageDrop.isEmpty {
                         Section {
                             Text(resultVoltageDrop)
                         } header: {
-                            Text(Bundle.localizedString(key: "result"))
+                            Text("Result")
                         }
                     }
                     
@@ -182,7 +221,7 @@ struct VoltageDropView: View {
                         // Inline result for Current and Voltage Drop
                         HStack {
                             VStack(alignment: .leading) {
-                                Text(Bundle.localizedString(key: "result_current"))
+                                Text("Current: ")
                                     .font(.headline)
                                 Text("\(sharedData.calculatedCurrent, specifier: "%.2f") A")
                                     .font(.body)
@@ -190,7 +229,7 @@ struct VoltageDropView: View {
                             }
                             Spacer()
                             VStack(alignment: .leading) {
-                                Text(Bundle.localizedString(key: "result_voltage"))
+                                Text("Voltage Drop: ")
                                     .font(.headline)
                                 Text("\(sharedData.voltageDrop, specifier: "%.2f") %")
                                     .font(.body)
@@ -200,21 +239,22 @@ struct VoltageDropView: View {
 
                         // Overlapping Max Cable Length vs Input Cable Length
                         VStack(alignment: .leading) {
-                            Text(Bundle.localizedString(key: "result_max_cable_length"))
+                            Text("Maximum Cable length: ")
                                 .font(.headline)
                             
                             ZStack(alignment: .leading) {
                                 GeometryReader { geometry in
                                     let maxBarWidth = geometry.size.width
                                     let safeMaxCableLength = max(maxCableLengthForResult, 1) // Prevent division by zero
-                                    let proportionalInputWidth = max(0, (cableLengthForResult / safeMaxCableLength) * maxBarWidth) // Ensure non-negative
+                                    let isOverMax = cableLengthForResult > maxCableLengthForResult
+                                    let proportionalInputWidth = min(max(0, (cableLengthForResult / safeMaxCableLength) * maxBarWidth), maxBarWidth)
                                     
                                     Rectangle()
                                         .fill(Color.gray.opacity(0.4))
                                         .frame(width: maxBarWidth, height: 20)
                                     
                                     Rectangle()
-                                        .fill(Color.green.opacity(0.7))
+                                        .fill(isOverMax ? Color.red.opacity(0.7) : Color.green.opacity(0.7))
                                         .frame(width: proportionalInputWidth, height: 20)
                                 }
                                 .frame(height: 20) // Ensures the GeometryReader height remains constrained
@@ -233,7 +273,7 @@ struct VoltageDropView: View {
                 .background(Color.clear)
             } header: {
                 HStack {
-                    Text(Bundle.localizedString(key: "result"))
+                    Text("Result")
                     Button(action: {
                         // Equation display
                         infoDialogIsPresented = true
@@ -245,24 +285,48 @@ struct VoltageDropView: View {
                             .padding(0)
                     }
                     .frame(maxWidth: .infinity, alignment: .trailing)
-                    .alert("Equation used", isPresented: $infoDialogIsPresented) {
-                        Button("OK", role: .cancel) { }
-                    } message: {
-                        Text("ΔV = (√3 × I × R × L) / 1000")
-                            .font(.system(size: 16, weight: .medium, design: .monospaced))
-                            .foregroundColor(.gray)
-                            .multilineTextAlignment(.center)
-                            .padding(20)
+                    .sheet(isPresented: $infoDialogIsPresented) {
+                        VStack(spacing: 32) {
+                            Text("Equation used")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+
+                            HStack(alignment: .center, spacing: 10) {
+                                Text("ΔV [%] =")
+                                    .font(.system(size: 20, weight: .medium, design: .monospaced))
+
+                                VStack(spacing: 4) {
+                                    Text("√3 × I × R × L")
+                                        .font(.system(size: 18, weight: .medium, design: .monospaced))
+                                    Rectangle()
+                                        .frame(height: 1.5)
+                                    Text("1000")
+                                        .font(.system(size: 18, weight: .medium, design: .monospaced))
+                                }
+                            }
+                            .padding(.horizontal)
+
+                            Button(action: { infoDialogIsPresented = false }) {
+                                Text("OK")
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.white)
+                                    .frame(width: 120)
+                                    .padding(.vertical, 10)
+                                    .background(Color.red)
+                                    .cornerRadius(10)
+                            }
+                            .buttonStyle(PlainButtonStyle())
+                        }
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(.regularMaterial)
+                        .presentationDetents([.fraction(0.35)])
+                        .presentationDragIndicator(.visible)
                     }
 
                 }
             }
         }
-        .onAppear{
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                isPowerInputFieldFocused = true
-            }
-        }
+        .scrollDismissesKeyboard(.interactively)
     }
     
     private func updateCrossSectionBasedOnMaterial() {
@@ -280,7 +344,7 @@ struct VoltageDropView: View {
               let voltageValue = Double(sharedData.voltage),
               let lengthValue = Double(sharedData.cableLength),
               let crossSectionValue = Double(sharedData.cableCrossSection) else {
-            resultVoltageDrop = Bundle.localizedString(key: "result_voltage_drop_invalid")
+            resultVoltageDrop = "Invalid input. Please enter valid numbers."
             return
         }
         
@@ -366,6 +430,9 @@ struct VoltageDropView: View {
 
 struct VoltageDropView_Previews: PreviewProvider {
     static var previews: some View {
-        VoltageDropView()
+        let model = SharedDataModel()
+        return VoltageDropView()
+            .environmentObject(model)
     }
 }
+
