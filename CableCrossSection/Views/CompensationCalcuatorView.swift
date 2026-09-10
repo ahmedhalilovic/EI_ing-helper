@@ -78,9 +78,7 @@ struct CompensationCalcuatorView: View {
                                 .frame(maxWidth: .infinity)
                             Picker("Power Factor (cos φ)", selection: $targetPowerFactor) {
                                 ForEach(80...100, id: \.self) { index in
-                                    let value = Double(index) / 100.0
-                                    Text(String(format: "%.2f", value))
-                                        .tag(value)
+                                    pfRow(index: index)
                                 }
                             }
                             .pickerStyle(WheelPickerStyle())
@@ -230,6 +228,13 @@ struct CompensationCalcuatorView: View {
         .animation(.easeInOut(duration: 0.2), value: infoDialogIsPresented)
     }
     
+    // MARK: Helper views
+    @ViewBuilder
+    private func pfRow(index: Int) -> some View {
+        let value = Double(index) / 100.0
+        Text(String(format: "%.2f", value)).tag(value)
+    }
+
     // MARK: Functions
     // Calculation Logic
     func calculateCapacitorSize() {

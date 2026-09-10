@@ -159,5 +159,6 @@ struct BusbarView: View {
 struct TableView_Previews: PreviewProvider {
     static var previews: some View {
         TableView()
+            .environmentObject(SharedDataModel())
     }
 }
