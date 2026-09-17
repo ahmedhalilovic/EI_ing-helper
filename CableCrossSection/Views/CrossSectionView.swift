@@ -215,7 +215,7 @@ struct CrossSectionView: View {
 
     // MARK: Calculation logic
     private func calculateCurrent() {
-        guard let power = Double(sharedData.powerKW),
+        guard let power = parseDouble(sharedData.powerKW),
               power > 0 else {
             resultCurrent1Phase = "Invalid input."
             resultCurrent3Phase = "Invalid input."

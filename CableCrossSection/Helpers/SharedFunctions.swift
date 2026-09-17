@@ -7,6 +7,12 @@
 
 import Foundation
 
+// Parses a user-entered string to Double, accepting both comma and dot as decimal separator
+func parseDouble(_ string: String) -> Double? {
+    let normalized = string.replacingOccurrences(of: ",", with: ".")
+    return Double(normalized)
+}
+
 func findBestOption(for current: Double, options: [DataVariables], keyPath: KeyPath<DataVariables, String>) -> DataVariables? {
     guard !options.isEmpty else { return nil }
     

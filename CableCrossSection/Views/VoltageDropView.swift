@@ -340,10 +340,10 @@ struct VoltageDropView: View {
     }
     
     func showResult() {
-        guard let power = Double(sharedData.powerKW),
-              let voltageValue = Double(sharedData.voltage),
-              let lengthValue = Double(sharedData.cableLength),
-              let crossSectionValue = Double(sharedData.cableCrossSection) else {
+        guard let power = parseDouble(sharedData.powerKW),
+              let voltageValue = parseDouble(sharedData.voltage),
+              let lengthValue = parseDouble(sharedData.cableLength),
+              let crossSectionValue = parseDouble(sharedData.cableCrossSection) else {
             resultVoltageDrop = "Invalid input. Please enter valid numbers."
             return
         }
@@ -366,7 +366,7 @@ struct VoltageDropView: View {
             guard maxLength > 0 else { return 0 }
             return CGFloat(length / maxLength) * maxBarWidth
         }
-        cableLengthForResult = Double(sharedData.cableLength) ?? 0
+        cableLengthForResult = parseDouble(sharedData.cableLength) ?? 0
         maxCableLengthForResult = maxCableLength
         
         // Filter options for copper and aluminum

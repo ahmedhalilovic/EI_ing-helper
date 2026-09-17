@@ -238,9 +238,9 @@ struct CompensationCalcuatorView: View {
     // MARK: Functions
     // Calculation Logic
     func calculateCapacitorSize() {
-        guard let p = Double(activePower),
-              let kvarh = Double(reactiveEnergy),
-              let hours = Double(operatingHours),
+        guard let p = parseDouble(activePower),
+              let kvarh = parseDouble(reactiveEnergy),
+              let hours = parseDouble(operatingHours),
               targetPowerFactor > 0, targetPowerFactor < 1 else {
             calculationError = "Invalid input. Please check your values."
             requiredCapacitor = ""

@@ -18,6 +18,7 @@ struct BusbarTableView: View {
                 .font(.title3)
                 .foregroundColor(.primary)
                 .bold()
+                .padding(.top, 12)
                 .padding(.bottom, 10)
             
             // Table Header
@@ -67,7 +68,7 @@ struct BusbarTableView: View {
                 .buttonStyle(PlainButtonStyle())
             }
             .frame(maxWidth: .infinity)
-            .padding()
+            .padding(.vertical, 12)
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
